@@ -19,48 +19,54 @@ function IntroductionWrite() {
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [file, setFile] = useState(null); // 추가: 파일 상태
+  const [file, setFile] = useState(null);
   const [notice_time, setNoticeTime] = useState(new Date().toISOString().split('.')[0] + 'Z'); 
-
-  useEffect(() => {
-    if (id) {
-      const fetchNotice = async () => {
-        try {
-          const response = await axios.get(`${address}notice/${id}`);
-          setTitle(response.data.title);
-          setContent(response.data.content);
-          setFile(response.data.file || null);
-          setNoticeTime(response.data.notice_time || '');
-        } catch (error) {
-          console.error('Error fetching notice:', error);
-        }
-      };
-      fetchNotice();
-    }
-  }, [id]);
+  function removeHtmlTags(input) {
+    return input.replace(/<[^>]*>?/gm, ''); // 정규식을 사용해 HTML 태그 제거
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = { notice_title: title, notice_comment: content, student_id, file, notice_time };
+    // FormData 생성
+    const formData = new FormData();
+    // 각 필드를 FormData에 추가
+    formData.append('student_id', student_id);
+    const sanitizedTitle = removeHtmlTags(title);
+    formData.append('notice_title', sanitizedTitle);
+    const sanitizedContent = removeHtmlTags(content);
+    formData.append('notice_comment', sanitizedContent);
+    formData.append('notice_time', notice_time);
+    formData.append('file', file);
 
     try {
       if (id) {
         setNoticeTime(new Date().toISOString().split('.')[0] + 'Z');
-        await axios.put(`${address}notice/${id}/`, data, { withCredentials: true });
+        // axios로 PUT 요청 시 FormData 전송
+        await axios.put(`${address}notice/${id}/`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        });
       } else {
-        await axios.post(`${address}notice/`, data);
+        // axios로 POST 요청 시 FormData 전송
+        await axios.post(`${address}notice/`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
       }
       navigate('/Notice');
     } catch (error) {
-      console.error('Error submitting notice:', error);
+      console.error('Error submitting notice:', error.response?.data); // 에러 응답 메시지 확인
     }
   };
 
   const handleDelete = async () => {
     try {
       await axios.delete(`${address}notice/${id}/`);
-      navigate('/Notice');
+      navigate('/introduction');
     } catch (error) {
       console.error('Error deleting notice:', error);
     }

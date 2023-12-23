@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from './component/Main/main/main';
 import Board from './component/Board/Board';  
 import Introduction from './component/Introduction/introduction';
+import IntroductionId from './component/Introduction/introduction_id';
 import IntroductionWrite from './component/Introduction/introduction_write';
 
 import Login from './component/Login/Login';
@@ -29,6 +30,7 @@ function App() {
 
                     <Route path="/Introduction" element={<Introduction />} />
                     <Route path='/IntroductionWrite' element={<IntroductionWrite />} />
+                    <Route path='/IntroductionId' element={<IntroductionId />} /> 
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/info" element={<Info />} />

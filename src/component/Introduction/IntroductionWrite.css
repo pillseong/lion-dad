@@ -55,3 +55,10 @@
     background-color: #f44336;
   }
   
+  .modal {
+    color: white;
+    width: 20vw;
+    height: 20vh;
+    border-radius: 10px;
+    background-color: #434343;
+  }
