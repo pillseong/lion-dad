@@ -13,9 +13,11 @@ const Task = () => {
   const [weekList, setWeekList] = useState([]);
   const [userAssignments, setUserAssignments] = useState([]); // 사용자 과제 목록 추가
 
+  const address = "https://port-0-likelion-12th-backend-9zxht12blqj9n2fu.sel4.cloudtype.app/week/"
+
   useEffect(() => {
     // 과제 목록 조회
-    axios.get('http://127.0.0.1:8000/assignment/')
+    axios.get(`${address}`)
       .then(response => {
         setAssignments(response.data);
       })
@@ -24,7 +26,7 @@ const Task = () => {
       });
 
     // 주차 리스트 조회
-    axios.get('http://127.0.0.1:8000/weeks/')
+    axios.get(`${address}`)
       .then(response => {
         setWeekList(response.data);
       })
@@ -41,7 +43,7 @@ const Task = () => {
   useEffect(() => {
     // 선택된 주차에 해당하는 사용자 과제 목록 조회
     if (selectedAssignment) {
-      axios.get(`http://127.0.0.1:8000/assignment/${selectedAssignment.id}/user-assignments/`)
+      axios.get(`${address}/${selectedAssignment.id}/user-assignments/`)
         .then(response => {
           setUserAssignments(response.data);
         })
@@ -53,7 +55,7 @@ const Task = () => {
 
   const handleAssignmentClick = (assignmentId) => {
     // 과제 세부조회
-    axios.get(`http://127.0.0.1:8000/assignment/${assignmentId}`)
+    axios.get(`${address}/${assignmentId}`)
       .then(response => {
         setSelectedAssignment(response.data);
       })
@@ -75,12 +77,12 @@ const Task = () => {
       // 예: title, description 등
     };
 
-    axios.post('http://127.0.0.1:8000/assignment/', newAssignmentData)
+    axios.post(`${address}`, newAssignmentData)
       .then(response => {
         // 생성된 과제를 assignments에 추가하거나, 필요한 동작을 수행하세요.
         console.log('Assignment created:', response.data);
         // 생성된 과제 목록 다시 불러오기
-        axios.get('http://127.0.0.1:8000/assignment/')
+        axios.get(`${address}`)
           .then(response => {
             setAssignments(response.data);
           })
@@ -100,7 +102,7 @@ const Task = () => {
       // 예: title, description 등
     };
 
-    axios.put(`http://127.0.0.1:8000/assignment/${selectedAssignment.id}/`, updatedAssignmentData)
+    axios.put(`${address}/${selectedAssignment.id}/`, updatedAssignmentData)
       .then(response => {
         // 수정된 과제를 업데이트하거나, 필요한 동작을 수행하세요.
         console.log('Assignment updated:', response.data);
@@ -118,12 +120,12 @@ const Task = () => {
     }
 
     // 과제 삭제
-    axios.delete(`http://127.0.0.1:8000/assignment/${selectedAssignment.id}/`)
+    axios.delete(`${address}/${selectedAssignment.id}/`)
       .then(response => {
         // 삭제된 과제를 처리하거나, 필요한 동작을 수행하세요.
         console.log('Assignment deleted:', response.data);
         // 삭제된 과제 목록 다시 불러오기
-        axios.get('http://127.0.0.1:8000/assignment/')
+        axios.get(`${address}`)
           .then(response => {
             setAssignments(response.data);
           })

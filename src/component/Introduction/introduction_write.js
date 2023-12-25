@@ -11,8 +11,8 @@ import { useAuth } from '../Login/AuthContext';
 
 function IntroductionWrite() {
   const { loginInfo } = useAuth();
-  const student_id = "20202020";
-  const address = "http://172.20.10.7:3000/";
+  const student_id = "20201776";
+  const address = "https://port-0-likelion-12th-backend-9zxht12blqj9n2fu.sel4.cloudtype.app/";
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ function IntroductionWrite() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // FormData 생성
     const formData = new FormData();
     // 각 필드를 FormData에 추가
@@ -38,7 +38,7 @@ function IntroductionWrite() {
     formData.append('notice_comment', sanitizedContent);
     formData.append('notice_time', notice_time);
     formData.append('file', file);
-
+  
     try {
       if (id) {
         setNoticeTime(new Date().toISOString().split('.')[0] + 'Z');
@@ -57,13 +57,13 @@ function IntroductionWrite() {
           },
         });
       }
-      navigate('/Notice');
+      navigate('/introduction'); // 작성 완료 후 /introduction 페이지로 이동
     } catch (error) {
       console.error('Error submitting notice:', error.response?.data); // 에러 응답 메시지 확인
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (id) => {
     try {
       await axios.delete(`${address}notice/${id}/`);
       navigate('/introduction');
@@ -94,9 +94,7 @@ function IntroductionWrite() {
         <label>File:</label>
         <input type="file" onChange={(e) => setFile(e.target.files[0])} />
 
-        {/* 추가: 작성 시간 */}
-        <label>Notice Time:</label>
-        <input type="text" value={notice_time} onChange={(e) => setNoticeTime(e.target.value)} />
+
 
         <div className="button-container">
           <button type="submit" className="submit-button">

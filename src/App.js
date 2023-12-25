@@ -7,6 +7,7 @@ import Board from './component/Board/Board';
 import Introduction from './component/Introduction/introduction';
 import IntroductionId from './component/Introduction/introduction_id';
 import IntroductionWrite from './component/Introduction/introduction_write';
+import IntroductionEdit from './component/Introduction/introductionEdit';
 
 import Login from './component/Login/Login';
 import { AuthProvider } from './component/Login/AuthContext';
@@ -31,6 +32,7 @@ function App() {
                     <Route path="/Introduction" element={<Introduction />} />
                     <Route path='/IntroductionWrite' element={<IntroductionWrite />} />
                     <Route path='/IntroductionId' element={<IntroductionId />} /> 
+                    <Route path="/edit-notice/:id" element={<IntroductionEdit />} />
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/info" element={<Info />} />
