@@ -39,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.33.2",
+    "@babel/plugin-proposal-private-property-in-object": "^1.0.10"
   }
 }

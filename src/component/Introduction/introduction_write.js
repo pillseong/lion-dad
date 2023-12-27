@@ -11,7 +11,7 @@ import { useAuth } from '../Login/AuthContext';
 
 function IntroductionWrite() {
   const { loginInfo } = useAuth();
-  const student_id = "20201776";
+  const student_id = 20201776;
   const address = "https://port-0-likelion-12th-backend-9zxht12blqj9n2fu.sel4.cloudtype.app/";
   
   const { id } = useParams();
@@ -43,7 +43,7 @@ function IntroductionWrite() {
       if (id) {
         setNoticeTime(new Date().toISOString().split('.')[0] + 'Z');
         // axios로 PUT 요청 시 FormData 전송
-        await axios.put(`${address}notice/${id}/`, formData, {
+        await axios.put(`${address}notice/${id}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

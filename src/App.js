@@ -14,7 +14,12 @@ import { AuthProvider } from './component/Login/AuthContext';
 
 import Info from './component/info/info';
 import Notice from './component/Notice/Notice';
+
 import Task from './component/Task/Task';
+import TaskWrite from './component/Task/TaskWrite';
+import TaskEdit from './component/Task/TaskEdit';
+import Assignment from './component/Task/Assingment';
+
 import BoardWrite from './component/Board/Board_write';
 
 import Test from './component/Board/Board_test';
@@ -37,7 +42,12 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/info" element={<Info />} />
                     <Route path="/Notice" element={<Notice />} />
+
                     <Route path="/Task" element={<Task />} />
+                    <Route path="/TaskWrite" element={<TaskWrite />} />
+                    <Route path='/TaskEdit/:id' element={<TaskEdit />} />
+                    <Route path='/Assignment/:id' element={<Assignment />} />
+
 
                     <Route path='/test' element={<Test />} />
                 </Routes>
