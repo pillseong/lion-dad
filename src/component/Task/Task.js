@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../Main/header/header';
 import './Task.css';
-import { useAuth } from '../Login/AuthContext';
+// import { useAuth } from '../Login/AuthContext';
 import { Link } from 'react-router-dom';
+import cookie from 'react-cookies';
 
 const Task = () => {
-  const { loginInfo, setLoginInfo } = useAuth();
+  // const { loginInfo, setLoginInfo } = useAuth();
 
   const student_id = 20201776;
   const userCount = 2;
@@ -16,7 +17,7 @@ const Task = () => {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [weekList, setWeekList] = useState([]);
-
+  const accessAddress = "http://192.168.0.4:8080/api/";
   const address = "https://port-0-likelion-12th-backend-9zxht12blqj9n2fu.sel4.cloudtype.app";
 
   const [newAssignmentData, setNewAssignmentData] = useState({
@@ -26,6 +27,10 @@ const Task = () => {
     assignment_type: 'C',
     deadline: '', // 합쳐진 deadline 값
   });
+  const [accessToken, setAccessToken] = useState(null);
+  const [refreshToken, setRefreshToken] = useState(null);
+  const [studentInfo ,setStudentInfo] = useState(null);
+
 
   const handleAssignmentClick = async (weeks) => {
     try {
@@ -63,6 +68,64 @@ const Task = () => {
       }
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const savedAccessToken = cookie.load("accessToken");
+        const savedRefreshToken = cookie.load("refreshToken");
+
+        setAccessToken(savedAccessToken);
+        setRefreshToken(savedRefreshToken);
+
+        const getAccessTokenResponse = await axios.post(
+          `${accessAddress}token/verify/`,
+          { token: savedAccessToken }
+        );
+        const studentId = getAccessTokenResponse.data.student_id;
+        setStudentInfo(studentId); 
+        console.log('Server Response:', getAccessTokenResponse);
+        console.log('Student ID:', studentId);
+      } catch (error) {
+        try {
+          const refreshTokenResponse = await axios.post(
+            `${accessAddress}token/refresh/`,
+            { refresh: refreshToken }
+          );
+
+          cookie.save("accessToken", refreshTokenResponse.data.access, {
+            path: "/",
+          });
+          setAccessToken(refreshTokenResponse.data.access);
+
+          const refreshedStudentInfoResponse = await axios.post(
+            `${accessAddress}token/verify/`,
+            { token: refreshTokenResponse.data.access }
+          );
+
+          setStudentInfo(refreshedStudentInfoResponse.data.student_id); // 수정된 부분
+          console.log(
+            "Refreshed Student Info Response:",
+            refreshedStudentInfoResponse.data
+          );
+
+          const validateRefreshToken = await axios.post(
+            `${accessAddress}token/`,
+            {
+              refresh: refreshToken,
+            }
+          );
+          console.log(
+            "Validate Refresh Token Response:",
+            validateRefreshToken.data
+          );
+        } catch (refreshError) {
+          console.error('Error refreshing token:', refreshError);
+        }
+      }
+    };
+
+    fetchData();
+  }, [accessAddress]); // 수정된 부분
 
   // front admin, back admin, front, back / division
 

@@ -7,7 +7,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './IntroductionWrite.css'; 
-import { useAuth } from '../Login/AuthContext';
+// import { useAuth } from '../Login/AuthContext';
 
 function IntroductionWrite() {
   const { loginInfo } = useAuth();
