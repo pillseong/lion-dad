@@ -1,117 +1,186 @@
-// board_test.js
-
 import React, { useState, useEffect } from 'react';
 import './board_test.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Header from '../Main/header/header';
+import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
+import cookie from "react-cookies";
+
 
 function Board_Write() {
-    // 상태 변수 초기화
-    const [movieContent, setMovieContent] = useState({
-        title: '',
-        content: ''
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [movieContent, setMovieContent] = useState({
+    student_id: 20201738,
+    title: '',
+    content: '',
+  });
+
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editingPostId, setEditingPostId] = useState(null);
+
+  const selectedBoard = location.state?.selectedBoard || 'qna';
+  console.log("주소입력", selectedBoard);
+
+  const targetBoard = selectedBoard === 'qna' ? 'qna' : 'free';
+    console.log("주소확인", targetBoard);
+
+  const apiAddresses = {
+    qna: 'http://13.124.78.53/qna/questions/',
+    free: 'http://13.124.78.53/free/questions/',
+  };
+
+  const address = apiAddresses[targetBoard];
+  console.log(address);
+
+  const handleTitleChange = (e) => {
+    setMovieContent({
+      ...movieContent,
+      title: e.target.value,
     });
+  };
 
-    const [viewContent, setViewContent] = useState([]);
-    const [editor, setEditor] = useState(null);
+  const handleContentChange = (e, editor) => {
+    const content = editor.getData();
+    setMovieContent({
+      ...movieContent,
+      content: content,
+    });
+  };
 
-    // 입력 폼 값 변경 시 호출되는 함수
-    const getValue = (e) => {
-        const { name, value } = e.target;
-        setMovieContent((prevContent) => ({
-            ...prevContent,
-            [name]: value
-        }));
+  //-----------------------------------
+  const [userName, setUserName] = useState(null);
+  const [userDivision, setUserDivision] = useState(null);
+  const [student_Id, setStudent_Id] = useState(null);
+  
+  const LoginAddress = "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+
+  const [accessToken, setAccessToken] = useState(null);
+  const [refreshToken, setRefreshToken] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const savedAccessToken = cookie.load("accessToken");
+        const savedRefreshToken = cookie.load("refreshToken");
+        setRefreshToken(savedRefreshToken);
+        setAccessToken(savedAccessToken);
+  
+        console.log("Trying to get access token...");
+  
+        const getAccessTokenResponse = await axios.post(
+          `${LoginAddress}`,
+          {
+            access: savedAccessToken,
+            refresh: savedRefreshToken,
+          }
+        );
+  
+        console.log("Get Access Token Response:", getAccessTokenResponse.data);
+        setUserName(getAccessTokenResponse.data.name);
+        setUserDivision(getAccessTokenResponse.data.division);
+        setStudent_Id(getAccessTokenResponse.data.username)
+        console.log(getAccessTokenResponse.data.name, getAccessTokenResponse.data.division, getAccessTokenResponse.data.username);
+        
+        console.log("Access Token:", getAccessTokenResponse.data.access);
+        cookie.save("accessToken", getAccessTokenResponse.data.access, {
+          path: "/",
+          expires: new Date(getAccessTokenResponse.data.expires),
+        });
+      } catch (error) {
+        console.error("Error checking access token:", error);
+      }
+    };
+  
+    // Call fetchData function
+    fetchData();
+  }, []); // Empty dependency array for the initial render only
+
+  useEffect(() => {
+    const fetchDataWrapper = async () => {
+      const savedAccessToken = await cookie.load('accessToken');
+      const savedRefreshToken = await cookie.load('refreshToken');
+
+      setAccessToken(savedAccessToken);
+      setRefreshToken(savedRefreshToken);
+
+      console.log('Access Token from Cookie:', savedAccessToken);
+      console.log('Refresh Token from Cookie:', savedRefreshToken);
+
+      // Assuming fetchData is a function that you've defined elsewhere
+      // await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
     };
 
-    // movieContent 상태가 업데이트 될 때 로그 출력
-    useEffect(() => {
-        console.log('Movie Content:', movieContent);
-    }, [movieContent]);
+    fetchDataWrapper();
+  }, []);
 
-    // viewContent 상태가 업데이트 될 때 로그 출력
-    useEffect(() => {
-        console.log('View Content:', viewContent);
-    }, [viewContent]);
+  //-----------------------------------
 
-    // 폼 초기화 함수
-    const clearForm = () => {
-        if (editor) {
-            // CKEditor 데이터 초기화
-            editor.setData('');
-        }
+  const handleCreatePost = async () => {
+    try {
+      const response = await axios.post(address, {
+        student_id: movieContent.student_id,
+        title: movieContent.title,
+        content: movieContent.content,
+      });
+      console.log(response.data);
 
-        // 제목 및 내용 초기화
-        setMovieContent({ title: '', content: '' });
-    };
+      setIsEditMode(false);
+      setEditingPostId(null);
+    } catch (error) {
+      console.error('게시물 등록 또는 수정 중 오류 발생:', error);
+      console.log("여기가 문제여");
+      console.log(movieContent);
+    }
+  };
 
-    return (
-        <>
-            <Header />
-            <div className="App">
-                <div className='eyes'>
-                    <h1>자유 게시판 초안 (테스트) </h1>
-                    <div className="movie-container">
-                        {/* viewContent를 매핑하여 게시물 출력 */}
-                        {viewContent.map((element, index) => (
-                            <div key={index}>
-                                <h2>{element.title}</h2>
-                                <div>{element.content}</div>
-                                <hr />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="form-wrapper">
-                    {/* 제목 입력란 */}
-                    <input
-                        className="title-input"
-                        type="text"
-                        placeholder="제목"
-                        onChange={getValue}
-                        name="title"
-                        value={movieContent.title}  // value 속성 추가
-                    />
-                    {/* CKEditor를 사용한 내용 입력 */}
-                    <CKEditor
-                        editor={ClassicEditor}
-                        data={movieContent.content}
-                        onReady={(editor) => {
-                            console.log('Editor is ready to use!', editor);
-                            setEditor(editor);
-                        }}
-                        onChange={(event, editor) => {
-                            // CKEditor 데이터 변경 시 호출되는 함수
-                            const data = editor.getData();
-                            setMovieContent((prevContent) => ({
-                                ...prevContent,
-                                content: data
-                            }));
-                        }}
-                        onBlur={(event, editor) => {
-                            console.log('Blur.', editor);
-                        }}
-                        onFocus={(event, editor) => {
-                            console.log('Focus.', editor);
-                        }}
-                    />
-                </div>
-                {/* 게시물 등록 버튼 */}
-                <button
-                    className="submit-button"
-                    onClick={() => {
-                        // viewContent 상태 업데이트
-                        setViewContent((prevContent) => [...prevContent, { ...movieContent }]);
-                        // 입력 폼 초기화 함수 호출
-                        clearForm();
-                    }}
-                >
-                    입력
-                </button>
-            </div>
-        </>
-    );
+  const handleCancelEdit = () => {
+    setIsEditMode(false);
+    setEditingPostId(null);
+    setMovieContent({
+      student_id: 20201738,
+      title: '',
+      content: '',
+    });
+  };
+
+  const handleSubmit = () => {
+    if (isEditMode) {
+      console.log('handleEditPost 함수가 정의되지 않았습니다.');
+      // handleEditPost();
+    } else {
+      handleCreatePost();
+    }
+  };
+
+  return (
+    <>
+      <Header />
+      <div className='tum'></div>
+      <h1 className="Board_title"><span>Lion</span>게시판 글쓰기</h1>
+      <div className="write_content">
+        <input
+          type="text"
+          placeholder="제목을 입력하세요."
+          value={movieContent.title}
+          onChange={handleTitleChange}
+        />
+        <CKEditor
+          editor={ClassicEditor}
+          data={movieContent.content}
+          onChange={handleContentChange}
+        />
+        <div className="buttons">
+          <button onClick={handleSubmit}>{isEditMode ? '수정 완료' : '작성 완료'}</button>
+          {isEditMode && (
+            <button onClick={handleCancelEdit}>수정 취소</button>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Board_Write;

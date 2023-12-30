@@ -3,63 +3,46 @@ import Header from '../Main/header/header';
 import cookie from 'react-cookies';
 import axios from 'axios';
 
-async function fetchData(accessAddress, accessToken, refreshToken, setAccessToken, setRefreshToken) {
-  try {
-    const getAccessTokenResponse = await axios.post(
-      `${accessAddress}token/verify/`,
-      { token: accessToken }
-    );
-    const studentId = getAccessTokenResponse.data.student_id;
-    console.log('Student ID:', studentId);
-  } catch (error) {
-    // 액세스 토큰이 만료된 경우 리프래시 토큰으로 새로고침 시도
-    try {
-      const refreshTokenResponse = await axios.post(
-        `${accessAddress}token/refresh/`,
-        { refresh: refreshToken }
-      );
-
-      cookie.save("accessToken", refreshTokenResponse.data.access, {
-        path: "/",
-      });
-
-      // 여기서 setAccessToken, setRefreshToken 함수가 정의되어 있는지 확인
-      if (setAccessToken && setRefreshToken) {
-        setAccessToken(refreshTokenResponse.data.access);
-        const refreshedStudentInfoResponse = await axios.post(
-          `${accessAddress}token/verify/`,
-          { token: refreshTokenResponse.data.access }
-        );
-
-        console.log(
-          "Refreshed Student Info Response:",
-          refreshedStudentInfoResponse.data
-        );
-
-        const validateRefreshToken = await axios.post(
-          `${accessAddress}token/`,
-          {
-            refresh: refreshTokenResponse.data.refresh,
-          }
-        );
-        console.log(
-          "Validate Refresh Token Response:",
-          validateRefreshToken.data
-        );
-      } else {
-        console.error('setAccessToken or setRefreshToken is not defined.');
-      }
-    } catch (refreshError) {
-      console.error('Error refreshing token:', refreshError);
-    }
-  }
-}
-
-function My_info() {
+function MyInfo() {
   const accessAddress = 'http://192.168.0.4:8080/api/';
+  const LoginAddress = "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
 
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const savedAccessToken = cookie.load("accessToken");
+        const savedRefreshToken = cookie.load("refreshToken");
+        setRefreshToken(savedRefreshToken);
+        setAccessToken(savedAccessToken);
+
+        console.log("Trying to get access token...");
+
+        const getAccessTokenResponse = await axios.post(
+          `${LoginAddress}`,
+          {
+            access: savedAccessToken,
+            refresh: savedRefreshToken,
+          }
+        );
+
+        console.log("Get Access Token Response:", getAccessTokenResponse.data);
+
+        console.log("Access Token:", getAccessTokenResponse.data.access);
+        cookie.save("accessToken", getAccessTokenResponse.data.access, {
+          path: "/",
+          expires: new Date(getAccessTokenResponse.data.expires),
+        });
+      } catch (error) {
+        console.error("Error checking access token:", error);
+      }
+    };
+
+    // Call fetchData function
+    fetchData();
+  }, []); // Empty dependency array for the initial render only
 
   useEffect(() => {
     const fetchDataWrapper = async () => {
@@ -72,7 +55,8 @@ function My_info() {
       console.log('Access Token from Cookie:', savedAccessToken);
       console.log('Refresh Token from Cookie:', savedRefreshToken);
 
-      await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
+      // Assuming fetchData is a function that you've defined elsewhere
+      // await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
     };
 
     fetchDataWrapper();
@@ -86,4 +70,4 @@ function My_info() {
   );
 }
 
-export default My_info;
+export default MyInfo;

@@ -1,3 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 90vh; /* 100% 뷰포트 높이 설정 */
+}
+.User_container {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    height: 25vh;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: #282828;
+    box-shadow: 0px 0px 50px 5px rgba(242, 152, 39, 0.12);
+}
+
+.lion-logo {
+    width: 50px; /* 이미지 너비 조절 */
+    height: 50px; /* 이미지 높이 조절 */
+    margin-right: 10px; /* 이미지와 User_container 사이 여백 조절 */
+  }
+
+.main_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10vh;
+}
+
 .header {
     display: flex;
     justify-content: space-around;
@@ -24,10 +53,3 @@
     color: black;
   }
 
-.commit_data {
-    margin-top: 30vh;
-    color: white;
-    font-size: 2vw;
-    display: flex;
-    justify-content: space-between;
-}

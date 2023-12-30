@@ -1,41 +1,85 @@
 import "./main.css"
 import Header from '../header/header';
-import React, { useState, useEffect } from 'react';
-import CommitInfo from './CommitInfo';
-import { useAuth } from "../../Login/AuthContext";
+import React, { useState, useEffect } from "react";
+import cookie from "react-cookies";
+import axios from "axios";
+import likelionLogo from '../../images/LikeLion_Logo.png';
 
 function Main() {
-    const [commitData, setCommitData] = useState([]);
-    const { loginInfo } = useAuth();
+  const LoginAddress =
+  "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  const [accessToken, setAccessToken] = useState(null);
+  const [refreshToken, setRefreshToken] = useState(null);
+  const [userInfo, setUserInfo] = useState([]);
+  const [userDivision, serUserDivision] = useState(null);
+  const [studentId, setStudentId] = useState(null);
+  const [userName, setUserName] = useState(null);
+
+  const getAccessToken = async () => {
+    try {
+      const savedAccessToken = cookie.load("accessToken");
+      const savedRefreshToken = cookie.load("refreshToken");
+      setAccessToken(savedAccessToken);
+      setRefreshToken(savedRefreshToken);
+
+      console.log("Trying to get access token...");
+
+      const getAccessTokenResponse = await axios.post(
+        `${LoginAddress}`,
+        {
+          access: savedAccessToken,
+          refresh: savedRefreshToken,
+        }
+      );
+
+      console.log("Get Access Token Response:", getAccessTokenResponse.data);
+      
+      // 상태를 업데이트하고 나서 값 확인
+      setUserInfo(getAccessTokenResponse.data)
+      serUserDivision(getAccessTokenResponse.data.division)
+      setStudentId(getAccessTokenResponse.data.username)
+      setUserName(getAccessTokenResponse.data.name)
+
+      console.log("userInfo: ", userInfo);
+      console.log(userDivision, studentId, userName);
+
+      console.log("Access Token:", getAccessTokenResponse.data.access);
+
+      cookie.save("accessToken", getAccessTokenResponse.data.access, {
+        path: "/",
+        expires: new Date(getAccessTokenResponse.data.access),
+      });
+    } catch (error) {
+      console.error("Error checking access token:", error);
+    }
+  };
+
+  // 최초 렌더링 시 또는 토큰이 있을 경우 한 번 호출
+  useEffect(() => {
+    getAccessToken();
+  }, []);
+  useEffect(() => {
+    console.log("userInfo: ", userInfo);
+    console.log("userDivision, studentId, userName: ", userDivision, studentId, userName);
+    serUserDivision(userDivision)
+    setStudentId(studentId)
+    setUserName(userName)
+  }, [userInfo, userDivision, studentId, userName]);
     
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch('https://api.github.com/repos/OckJuYong/Likelion_homePage/commits');
-            const data = await response.json();
-            setCommitData(data);
-          } catch (error) {
-            console.error('Error fetching commit data:', error);
-          }
-        };
-    
-        fetchData();
-      }, []);
+
 
 
     return (
-        <div>
-            <Header />
-            <div className="commit_data">
-                <div>커밋정보
-                    {commitData.map((commit, index) => (
-                        <CommitInfo key={index} commit={commit} />
-                    ))}
-                </div>
-                <div>공지사항</div>
-            </div>
-
-
+        <div className="main_container">
+          <img src={likelionLogo} alt="Lion Logo" className="lion-logo" />
+          <div className="User_container">
+            <div className="Lion_info">Lion Info</div>
+            <span>school : HBNU</span>
+            <span>Student_Number : {studentId}</span>
+            <span>Name : {userName}</span>
+            <span> Division : {userDivision}</span>
+          </div>
+          <Header />
         </div>
     );
 }

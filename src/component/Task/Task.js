@@ -68,64 +68,7 @@ const Task = () => {
       }
     }
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const savedAccessToken = cookie.load("accessToken");
-        const savedRefreshToken = cookie.load("refreshToken");
-
-        setAccessToken(savedAccessToken);
-        setRefreshToken(savedRefreshToken);
-
-        const getAccessTokenResponse = await axios.post(
-          `${accessAddress}token/verify/`,
-          { token: savedAccessToken }
-        );
-        const studentId = getAccessTokenResponse.data.student_id;
-        setStudentInfo(studentId); 
-        console.log('Server Response:', getAccessTokenResponse);
-        console.log('Student ID:', studentId);
-      } catch (error) {
-        try {
-          const refreshTokenResponse = await axios.post(
-            `${accessAddress}token/refresh/`,
-            { refresh: refreshToken }
-          );
-
-          cookie.save("accessToken", refreshTokenResponse.data.access, {
-            path: "/",
-          });
-          setAccessToken(refreshTokenResponse.data.access);
-
-          const refreshedStudentInfoResponse = await axios.post(
-            `${accessAddress}token/verify/`,
-            { token: refreshTokenResponse.data.access }
-          );
-
-          setStudentInfo(refreshedStudentInfoResponse.data.student_id); // 수정된 부분
-          console.log(
-            "Refreshed Student Info Response:",
-            refreshedStudentInfoResponse.data
-          );
-
-          const validateRefreshToken = await axios.post(
-            `${accessAddress}token/`,
-            {
-              refresh: refreshToken,
-            }
-          );
-          console.log(
-            "Validate Refresh Token Response:",
-            validateRefreshToken.data
-          );
-        } catch (refreshError) {
-          console.error('Error refreshing token:', refreshError);
-        }
-      }
-    };
-
-    fetchData();
-  }, [accessAddress]); // 수정된 부분
+  
 
   // front admin, back admin, front, back / division
 
