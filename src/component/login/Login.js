@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import cookie from "react-cookies";
 import axios from "axios";
 import Header from "../Main/header/header";
 import { useAuth } from "./AuthContext";
 import "./Login.css";
-import cookie from "react-cookies";
 
 function Login() {
   const address = "http://192.168.0.4:8080/api/";
@@ -109,34 +109,50 @@ function Login() {
 
   return (
     <>
-      <Header />
+  
+      
       <div className="login_Border">
+     <div className="login_title">
+      <h2>LIKE LION</h2>
+      <h3>12TH</h3>
+      <h4> <span>with</span> Hanbat Univ</h4>
+     </div>
         <div className="login_state">
+          {/* 폼 제출 시 FormEvent 함수 호출 */}
+          <h2 className="title">LOGIN</h2>
           <form onSubmit={FormEvent}>
-            <label htmlFor="id">ID:</label>
+            <label htmlFor="id">ID</label>
+            {/* 사용자 ID 입력 필드 */}
             <input
               type="text"
               id="id"
               name="id"
-              value={userData.username}
+              value={userData.student_id}
               onChange={(e) => changeId(e.target.value)}
+              placeholder="Student number"
             />
 
-            <label htmlFor="pw">PW:</label>
+            <label htmlFor="pw">Password</label>
+            {/* 사용자 비밀번호 입력 필드 */}
             <input
               type="password"
               id="pw"
               name="pw"
               value={userData.password}
               onChange={(e) => changePw(e.target.value)}
+              placeholder="Password"
             />
-
+            <hr className="line"/>  
+          
+            {/* 로그인 버튼 */}
             <div className="login_Button">
-              <button type="submit">Login</button>
+              <button type="submit">LOGIN</button>
             </div>
           </form>
         </div>
+        
       </div>
+      <div className="bottom">This page copyrighted to <span>Hanbat University Lion</span> management</div>
     </>
   );
 }
