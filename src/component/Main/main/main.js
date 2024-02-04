@@ -4,10 +4,17 @@ import React, { useState, useEffect } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 import likelionLogo from '../../images/LikeLion_Logo.png';
+import MyInfoImg from '../../images/MyInfo.png';
+import { useNavigate } from 'react-router-dom';
+import LogoHeader from '../header/LogoHeader';
+
+import MenuHeader from "../header/MenuHeader";
 
 function Main() {
+  const navigate = useNavigate();
   const LoginAddress =
-  "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  // "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  "http://15.164.190.171/login/";
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
   const [userInfo, setUserInfo] = useState([]);
@@ -65,23 +72,54 @@ function Main() {
     setStudentId(studentId)
     setUserName(userName)
   }, [userInfo, userDivision, studentId, userName]);
+
+  const LogoutHeandler = () => {
+    cookie.remove("accessToken", { path: "/" });
+    cookie.remove("refreshToken", { path: "/" });
+
+    // Clear state values
+    setAccessToken(null);
+    setRefreshToken(null);
+    setUserInfo([]);
+    serUserDivision(null);
+    setStudentId(null);
+    setUserName(null);
+
+    navigate('/login');
+  } 
     
 
 
+//LikeLion 연한노란색   H 빨간색, B 남색, N 매우연한노란색, U 하늘색
 
-    return (
-        <div className="main_container">
-          <img src={likelionLogo} alt="Lion Logo" className="lion-logo" />
-          <div className="User_container">
-            <div className="Lion_info">Lion Info</div>
-            <span>school : HBNU</span>
-            <span>Student_Number : {studentId}</span>
-            <span>Name : {userName}</span>
-            <span> Division : {userDivision}</span>
-          </div>
-          <Header />
+  return (
+    <div className="main_container">
+      {/* <MenuHeader /> */}
+      <LogoHeader />
+      <div className="User__main__container">
+        <div className="Lion__info__container">
+          <span className="user__yellow">Lion </span>
+          <span className="user__Info"> Info</span>
         </div>
-    );
+        <div className="UserMainInfo">
+          <span>School : HBNU</span>
+          <span>Student_Number : {studentId}</span>
+          <span>Name : {userName}</span>
+          <span> Division : {userDivision}</span>
+          <a href="http://localhost:3000/notice">
+            <img src={MyInfoImg} alt="ImfoLofo" className="MyInfoImg" />
+          </a>
+        </div>
+        <button className="Logout_button" onClick={LogoutHeandler}>
+          {accessToken ? 'LOGOUT' : 'LOGIN'}
+        </button>
+
+
+        
+      </div>
+      <Header className="Header"/>
+    </div>
+  );
 }
 
 export default Main;

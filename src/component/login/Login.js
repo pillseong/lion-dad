@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 import Header from "../Main/header/header";
-import { useAuth } from "./AuthContext";
 import "./Login.css";
 
 function Login() {
   const address = "http://192.168.0.4:8080/api/";
-  const LoginAddress =
-    "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
-  const { setLoginInfo } = useAuth();
+  const LoginAddress = "http://15.164.190.171/login/";
   const expires = new Date();
 
   const [userData, setUserData] = useState({
@@ -119,20 +116,20 @@ function Login() {
      </div>
         <div className="login_state">
           {/* 폼 제출 시 FormEvent 함수 호출 */}
-          <h2 className="title">LOGIN</h2>
+          <h2 className="Login">LOGIN</h2>
           <form onSubmit={FormEvent}>
-            <label htmlFor="id">ID</label>
+            <label className="Id" htmlFor="id">ID</label>
             {/* 사용자 ID 입력 필드 */}
             <input
               type="text"
               id="id"
               name="id"
-              value={userData.student_id}
+              value={userData .student_id}
               onChange={(e) => changeId(e.target.value)}
               placeholder="Student number"
             />
 
-            <label htmlFor="pw">Password</label>
+            <label className="Pw" htmlFor="pw">Password</label>
             {/* 사용자 비밀번호 입력 필드 */}
             <input
               type="password"
@@ -142,7 +139,7 @@ function Login() {
               onChange={(e) => changePw(e.target.value)}
               placeholder="Password"
             />
-            <hr className="line"/>  
+            <hr className="Login-line"/>  
           
             {/* 로그인 버튼 */}
             <div className="login_Button">

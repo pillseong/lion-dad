@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '../Main/header/header';
 import axios from 'axios';
-import './Board.css';
+import '../Board/Board.css';
 import cookie from "react-cookies";
+
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+import LogoHeader from '../Main/header/LogoHeader';
+import MenuHeader from "../Main/header/MenuHeader";
+
+import leftButton from '../Board/left.png';
+import rightButton from '../Board/right.png';
 
 
 function Board() {
-  const studentId = parseInt('20201111', 10);
+
+  const sliderRef = useRef(null);
+  let studentId = parseInt('20201111', 10);
+  let [jjinStudentId, setJjinStudentId] = useState(null);
   const [selectedBoard, setSelectedBoard] = useState('qna');
   const [selectedPost, setSelectedPost] = useState(null);
   const [comment, setComment] = useState('');
@@ -23,25 +35,31 @@ function Board() {
   const [address, setAddress] = useState('http://13.124.78.53/qna/questions'); // 초기 주소 설정
   const navigate = useNavigate();
 
+ 
+
   useEffect(() => {
     const fetchBoardData = async () => {
       try {
-        const response = await axios.get(`${address}/?student_id=${showMyPosts ? studentId : ''}`);
+        const response = await axios.get(`${address}/?student_id=${showMyPosts ? student_Id : ''}&ordering=-id`);
         setBoard(response.data);
       } catch (error) {
         console.error('게시판 데이터를 불러오는 중 오류 발생:', error);
       }
     };
     fetchBoardData();
-  }, [showMyPosts, address, studentId]);
+  }, [showMyPosts]);
 
   //----------------------------------------
 
   const [userName, setUserName] = useState(null);
   const [userDivision, setUserDivision] = useState(null);
   const [student_Id, setStudent_Id] = useState(null);
+  studentId = parseInt(student_Id, 10)
+  setJjinStudentId = studentId;
   
-  const LoginAddress = "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  const LoginAddress = 
+  // "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  "http://15.164.190.171/login/";
 
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
@@ -64,13 +82,13 @@ function Board() {
           }
         );
   
-        console.log("Get Access Token Response:", getAccessTokenResponse.data);
         setUserName(getAccessTokenResponse.data.name);
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
-        console.log(getAccessTokenResponse.data.name, getAccessTokenResponse.data.division, getAccessTokenResponse.data.username);
+        console.log(getAccessTokenResponse.data.username);
+        console.log(getAccessTokenResponse.data.division);
         
-        console.log("Access Token:", getAccessTokenResponse.data.access);
+        
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
           path: "/",
           expires: new Date(getAccessTokenResponse.data.expires),
@@ -92,8 +110,6 @@ function Board() {
       setAccessToken(savedAccessToken);
       setRefreshToken(savedRefreshToken);
 
-      console.log('Access Token from Cookie:', savedAccessToken);
-      console.log('Refresh Token from Cookie:', savedRefreshToken);
 
       // Assuming fetchData is a function that you've defined elsewhere
       // await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
@@ -106,11 +122,13 @@ function Board() {
   const setBoardType = (type) => {
     setSelectedBoard(type);
   };
-
   const handleBoardTypeChange = (type) => {
     setBoardType(type);
     setAddress(`http://13.124.78.53/${type}/questions`);
+  
+    
   };
+ 
 
   const handleMyPostsCheckboxChange = () => {
     setShowMyPosts(!showMyPosts);
@@ -121,7 +139,6 @@ function Board() {
       try {
         const response = await axios.get(`${address}/`);
         setBoard(response.data);
-        console.log(address);
       } catch (error) {
         console.error('게시판 데이터를 불러오는 중 오류 발생:', error);
       }
@@ -285,61 +302,198 @@ function Board() {
     navigate('/boardWrite', { state: { selectedBoard } });
   };
 
+  //---------------스와이퍼부분
+
+  
+
+  // 상단 슬라이더와 하단 슬라이더에 대한 인스턴스 생성
+
+  const handleSliderPrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleSliderNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const slickSettings = {
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    slidesPerRow: 4, 
+    arrows: true, 
+    infinite: true,
+    infinite: false,
+    dots: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+  //---------------스와이퍼부분
+  const qnaButtonRef = useRef(null);
+  const freeButtonRef = useRef(null);
+
+  useEffect(() => {
+    // 컴포넌트가 마운트된 후에 참조가 올바르게 설정될 것입니다.
+    qnaButtonRef.current = document.getElementById('qnaButton');
+    freeButtonRef.current = document.getElementById('freeButton');
+  }, []);
+
+  const handleButtonClick = (buttonRef) => {
+    // 버튼 참조가 유효한지 확인
+    if (buttonRef.current) {
+      // 버튼 클릭 시 해당 버튼에 .moved 클래스 추가
+      buttonRef.current.classList.add('moved');
+  
+      // 다른 버튼에는 .moved 클래스 제거
+      const otherButtonRef = buttonRef === qnaButtonRef ? freeButtonRef : qnaButtonRef;
+      if (otherButtonRef.current) {
+        otherButtonRef.current.classList.remove('moved');
+      }
+  
+      // 자유게시판 버튼을 클릭했을 때
+      if (buttonRef === freeButtonRef) {
+        handleBoardTypeChange('free'); // 여기에 추가: 선택한 버튼에 따라 게시판 타입을 변경
+      } else {
+        handleBoardTypeChange('qna'); // QnA게시판 버튼 클릭 시에는 'qna'로 변경
+      }
+    }
+  };
   return (
     <>
-      <Header />
-      <div className='tum'></div>
-      <h1 className="Board_title"><span>Lion</span>자유게시판</h1>
-      <div className='choice_button'>
-        <div className="Board_buttons">
-          <button onClick={() => handleBoardTypeChange('qna')}>자유게시판</button>
-          <button onClick={() => handleBoardTypeChange('free')}>QnA게시판</button>
-          <label>
-            <input
-              type="checkbox"
-              checked={showMyPosts}
-              onChange={handleMyPostsCheckboxChange}
-            />
-            내가 쓴 글
-          </label>
-        </div>
-        <button onClick={handleWriteButtonClick} className='write_button'>글 작성</button>
+      <div  className="board__logoHeader">
+        <LogoHeader />
+        <MenuHeader />
       </div>
+      <div className='tum'></div>
+      <div className='choice_button'>
+        <div className='Board_main_header_container'>
+          <span className='Board_Lion_title'>Lion</span>
+          <span className="Board__title">{`${selectedBoard}게시판`}</span>
+          <div className="Board_buttons">
+            <button className="board__qna__button" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
+            <button className="board__free__button" id="freeButton" onClick={() =>  handleButtonClick(freeButtonRef)}>자유게시판</button>
+            {/* <label>
+              <input
+                type="checkbox"
+                checked={showMyPosts}
+                onChange={handleMyPostsCheckboxChange}
+              />
+              내가 쓴 글
+            </label> */}
+          </div>
+        </div>
+        <button onClick={handleWriteButtonClick} className='write_button'>+</button>
+      </div>
+      <hr className='board_line'/>
       <div className="Board_content">
         {board.length > 0 && (
           <>
-            <h2>{`${selectedBoard} 게시판`}</h2>
-            <table className="Board_table">
-              <thead>
-                <tr className='ttl'>
-                  <th>ID</th>
-                  <th>이름</th>
-                  <th>제목</th>
-                </tr>
-              </thead>
-              <tbody>
-                {board.map((post) => (
-                  <tr key={post.id} onClick={() => handlePostClick(post.id)}>
-                    <td>{post.id}</td>
-                    <td>{post.author ? post.author.name : '알 수 없는 작성자'}</td>
-                    <td>{post.title}</td>
-                    <td>
-                      <button onClick={(event) => deletePost(event)}>삭제</button>
-                      <button onClick={() => navigateToEditPage(post.id)}>수정</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="slider_button_container">
+              <button onClick={handleSliderPrev}><img className="slider__left__button" src={leftButton} alt="Left Button" /></button>
+              <button onClick={handleSliderNext}><img src={rightButton} alt="Right Button" /></button>
+            </div>
+            <div className="Board_table">
+              <Slider {...slickSettings} ref={sliderRef}>
+                {board[0].id > board[1].id ?
+                  board.map((post, index) => (
+                    <div key={post.id} className='board_swiper_main_container'>
+                      <div className="board_swiper_container" onClick={() => handlePostClick(post.id)}>
+                        <div className='board_swiper_left'>
+                          <div className='board_swiper_left_id'>{post.id}</div>
+                          <div className='board_swiper_left_title'>{post.title}{post.content}</div>
+                        </div>
+                        <div className='board__write__name'>
+                          {userDivision == "admin" ? post.author.name : ''}
+                          <div className='board__write__time'>
+                            {post.created_at.split('T')[0]}
+                          </div>
+                        </div>
+                        <div>
+                          <div className='board__del__edit__button'>
+                            {userDivision === "admin" ? (
+                              <button className="board__admin__del__button" onClick={(event) => deletePost(event)}>
+                                ❌
+                              </button>
+                            ) : (
+                              null
+                            )}
+                          </div>
+                          <div>
+                            {userDivision === "admin" || post.author.student_id === student_Id ? (
+                              <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
+                                🔨
+                              </button>
+                            ) : (
+                              null
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )) : 
+                  board.reverse().map((post, index) => (
+                    <div key={post.id} className='board_swiper_main_container'>
+                      <div className="board_swiper_container" onClick={() => handlePostClick(post.id)}>
+                        <div className='board_swiper_left'>
+                          <div className='board_swiper_left_id'>{post.id}</div>
+                          <div className='board_swiper_left_title'>{post.title}{post.content}</div>
+                        </div>
+                        <div className='board__write__name'>
+                          {userDivision == "admin" ? post.author.name : '알 수 없는 작성자'}
+                          <div className='board__write__time'>
+                            {post.created_at.split('T')[0]}
+                            {userDivision}
+                          </div>
+                        </div>
+                        <div>
+                          <div className='board__del__edit__button'>
+                            {userDivision === "admin" ? (
+                              <button className="board__admin__del__button" onClick={(event) => deletePost(event)}>
+                                ❌
+                              </button>
+                            ) : (
+                              null
+                            )}
+                          </div>
+                          <div>
+                            {userDivision === "admin" || post.author.student_id === student_Id ? (
+                              <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
+                                🔨
+                              </button>
+                            ) : (
+                              null
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </Slider>
+            </div>
+
+  
             {selectedPost && board.find((post) => post.id === selectedPost) && isModalOpen && (
               <>
                 <div className="overlay" onClick={closeModal}></div>
-                <div className="modal">
-                  <h3>{`게시물 ID: ${selectedPost}`}</h3>
+                <div className="modal"  style={{ width: '50%', height: "80%"}}>
+                  <h3 className='modal__title'>{`${postDetails ? postDetails.title : '불러오는 중...'}`}</h3>
+                  <span></span>
+                  <div className='modal__day__line'></div>
                   {!isEditMode ? (
                     <>
-                      <div>{`게시물 제목: ${postDetails ? postDetails.title : '불러오는 중...'}`}</div>
-                      <div>{`게시물 내용: ${postDetails ? postDetails.content : '불러오는 중...'}`}</div>
+                      <div>{` ${postDetails ? postDetails.content : '불러오는 중...'}`}</div>
                     </>
                   ) : (
                     <>
@@ -357,27 +511,40 @@ function Board() {
                     </>
                   )}
                   <div>
-                    <h3>댓글</h3>
-                    <ul>
+                    <h3 className='modal__answer__main'>댓글</h3>
+                    <div className='modal__answer__liner'></div>
                       {answers.map((answer) => (
-                        <li key={answer.id}>{answer.id}:{answer.content}
-                          <button onClick={() => deleteAnswer(answer.id)}>삭제</button>
-                          <button onClick={() => editevent(answer.id)}>수정</button>
+                        <>
+                        <span className='madal__userInfo'>{answer.id}</span>
+                        <li key={answer.id} className='modal__answer__answer_main'>
+                          <span className='modal__answer__answer'>{answer.content}</span>
+                          <div>
+                            <button className="modal__answer__edit" onClick={() => editevent(answer.id)}>수정</button>
+                            <button className="modal__answer__del" onClick={() => deleteAnswer(answer.id)}>-</button>
+                          </div>
                         </li>
+                        </>
                       ))}
-                    </ul>
-                    <textarea
-                      placeholder="댓글을 입력하세요"
-                      value={comment}
-                      onChange={handleCommentChange}
-                    />
-                    <button onClick={addAnswer}>댓글 작성</button>
-                  </div>
-                  {!isEditMode && (
-                    <button onClick={editComment}>수정 완료</button>
-                  )}
-                  <button onClick={closeModal}>닫기</button>
-                </div>
+                      <div className='modal__answer__container'>
+                        <div className='modal__answer__input__container'>
+                          <span className='modal__answer__input__main'>댓글 작성</span>
+                          <textarea
+                            placeholder="댓글을 입력하세요"
+                            value={comment}
+                            onChange={handleCommentChange}
+                            className='modal__answer__input'
+                          />
+                        </div>
+                        <div className='modal__plusAndChange'>
+                          <button className="modal__add__button" onClick={addAnswer}>ADD</button>
+                          {!isEditMode && (
+                            <button className="modal__edit__button"onClick={editComment}>EDIT</button>
+                          )}
+                        </div>
+                        </div>
+                      </div>
+                    <button className="modal__close-button" onClick={closeModal}>X</button>
+                    </div>
               </>
             )}
           </>

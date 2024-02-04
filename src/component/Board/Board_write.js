@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './board_test.css';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Header from '../Main/header/header';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import cookie from "react-cookies";
+import './Board_write.css';
+
+import MenuHeader from '../Main/header/MenuHeader';
+import LogoHeader from '../Main/header/LogoHeader';
+
 
 
 function Board_Write() {
@@ -54,8 +58,19 @@ function Board_Write() {
   const [userName, setUserName] = useState(null);
   const [userDivision, setUserDivision] = useState(null);
   const [student_Id, setStudent_Id] = useState(null);
+
+  useEffect(() => {
+    setMovieContent({
+      student_id: student_Id,  // 변수로 직접 사용, 중괄호 제거
+      title: '',
+      content: '',
+    });
+  }, [student_Id]);
+  console.log(setMovieContent.student_Id);
   
-  const LoginAddress = "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  const LoginAddress = 
+  // "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  "http://15.164.190.171/login/";
 
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
@@ -83,7 +98,11 @@ function Board_Write() {
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
         console.log(getAccessTokenResponse.data.name, getAccessTokenResponse.data.division, getAccessTokenResponse.data.username);
-        
+        setMovieContent((prevContent) => ({
+          ...prevContent,
+          student_id: parseInt(getAccessTokenResponse.data.username, 10),
+        }));
+        console.log(movieContent);
         console.log("Access Token:", getAccessTokenResponse.data.access);
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
           path: "/",
@@ -125,10 +144,13 @@ function Board_Write() {
         title: movieContent.title,
         content: movieContent.content,
       });
+      console.log(movieContent);
       console.log(response.data);
 
       setIsEditMode(false);
       setEditingPostId(null);
+      navigate('/Board');
+
     } catch (error) {
       console.error('게시물 등록 또는 수정 중 오류 발생:', error);
       console.log("여기가 문제여");
@@ -140,7 +162,7 @@ function Board_Write() {
     setIsEditMode(false);
     setEditingPostId(null);
     setMovieContent({
-      student_id: 20201738,
+      student_id: {student_id},
       title: '',
       content: '',
     });
@@ -150,6 +172,7 @@ function Board_Write() {
     if (isEditMode) {
       console.log('handleEditPost 함수가 정의되지 않았습니다.');
       // handleEditPost();
+      navigate('/Board');
     } else {
       handleCreatePost();
     }
@@ -157,26 +180,38 @@ function Board_Write() {
 
   return (
     <>
-      <Header />
+      <MenuHeader />
+      <LogoHeader />
       <div className='tum'></div>
-      <h1 className="Board_title"><span>Lion</span>게시판 글쓰기</h1>
-      <div className="write_content">
-        <input
-          type="text"
-          placeholder="제목을 입력하세요."
-          value={movieContent.title}
-          onChange={handleTitleChange}
+        <div className='board__write__main__container'>
+          <div className='board__write__title__container'>
+            <h1 className="Board_title"><span>Lion</span>게시판 제목</h1>
+            <div className="write_content">
+              <input
+                type="text"
+                value={movieContent.title}
+                onChange={handleTitleChange}
+                className='board__write__title'
+              />
+          </div>
+          <h1 className="Board_content"><span>Lion</span>게시판 내용</h1>
+          <textarea
+          value={movieContent.content}
+          onChange={(e) => handleContentChange(e, { getData: () => e.target.value })}
+          className='board__write__content'
         />
-        <CKEditor
-          editor={ClassicEditor}
-          data={movieContent.content}
-          onChange={handleContentChange}
-        />
-        <div className="buttons">
-          <button onClick={handleSubmit}>{isEditMode ? '수정 완료' : '작성 완료'}</button>
-          {isEditMode && (
-            <button onClick={handleCancelEdit}>수정 취소</button>
-          )}
+          {/* <CKEditor
+            editor={ClassicEditor}
+            data={movieContent.content}
+            onChange={handleContentChange}
+            className="custom-ckeditor-style"
+          /> */}
+          <div className="buttons">
+            <button className="board_edit_button" onClick={handleSubmit}>{isEditMode ? 'ADD' : 'ADD'}</button>
+            {isEditMode && (
+              <button className="board_edit_button_del" onClick={handleCancelEdit}>수정 취소</button>
+            )}
+          </div>
         </div>
       </div>
     </>
