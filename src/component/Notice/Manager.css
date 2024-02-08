@@ -6,7 +6,7 @@
     background-color: #F29827;
   }
     .Frontend_Manager{
-        margin-left: -45%;
+        margin-left: -74%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -19,58 +19,137 @@
     text-align: center;
     text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
     font-family: Inter;
-    font-size: 20px;
+    font-size: 23.4px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 3%;
+    margin-top: 1%;
     
     }
-    .Frontend_box{
-        width: 600px;
-    height: 3000px;
+    .Manager_manager{
+    position: absolute;
+    margin-top: 3.4%;
+    margin-left: -74%;
+        color: #FFF;
+    text-align: center;
+    text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
+    font-family: Inter;
+    font-size: 23.4px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+       
+    }
+    .Design_box{
+        position: absolute;
+        width: 1150px;
+    height: 400px;
     flex-shrink: 0;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.50);
-   margin-top: 12%;
-   margin-left: 3%;
-   background: url(front1.png),url(front2.png);
-   background-size: 30%,30%;
-   background-repeat: no-repeat,no-repeat;
-   background-position: center 4%,center 30%;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;
+   margin-top: 186%;
+   margin-left: -3%;
+   background: url(design.png);
+   background-size: 23%;
    
+  border-radius: 20px;
+   background-repeat: no-repeat,no-repeat;
+   background-position: 90% center;
+   fill: #282828;
+   
+
+    }
+    .Frontend_box{
+        position: absolute;
+        width: 1150px;
+    height: 400px;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;
+   margin-top: 10%;
+   margin-left: -3%;
+   background: url(front1.png);
+   background-size: 23%;
+   
+  border-radius: 20px;
+   background-repeat: no-repeat,no-repeat;
+   background-position: 90% center;
+   fill: #282828;
+   
+
+    }
+    .Design_Reader{
+        color: #83C586;
+text-align: center;
+font-family: Inter;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+position: absolute;
+margin-top: 5%;
+margin-left: 10%;
 
     }
     .Frontend_Reader{
 color: #83C586;
 text-align: center;
 font-family: Inter;
-font-size: 20px;
+font-size: 24px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
 position: absolute;
-margin-top: 24%;
-margin-left: 16%;
+margin-top: 5%;
+margin-left: 10%;
     }
+
+.manager{
+    font-size: 24px;
+    margin-left :25%;
+    margin-top: -0.8% ;
+
+}
+.show1{
+    margin-top: -3%;
+    margin-left: 6%;
+}
     
 .ex1{
     color: #FFF;
 font-family: Inter;
-font-size: 16px;
+font-size: 14px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
 position:absolute;
-margin-top:26%;
+margin-top:8%;
 justify-content: center;
-margin-left: 20%;
+margin-left: 10%;
 align-content: center;
 
+}
+.ex6{
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position:absolute;
+    margin-top:9%;
+    justify-content: center;
+    margin-left: 10%;
+    align-content: center;
+
+}
+.ex2{
+    font-size: 14px;
+    margin-top: 2%;
+    margin-right: -82%;
 }
 .ex3{
     color: #FFF;
     font-family: Inter;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -82,74 +161,214 @@ align-content: center;
     
     
 }
+.ex4{
+
+    position: absolute;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position:absolute;
+    margin-top:26%;
+    justify-content: center;
+    margin-left: 20%;
+    align-content: center;
+}
+.AA{
+    position: absolute;
+    margin-top: -3%;
+}
+.BB{
+    position: absolute;
+    margin-top: 4%;
+}
+.CC{
+    position: absolute;
+    margin-top: 7%;
+
+}
+.DD{
+    margin-top: 18%;
+}
 
 
+.A3{
+    
+    position: absolute;
+    margin-left: 38%;
+    margin-top: -21%;
+    
 
 
+}
+.A2{
+    
+        position: absolute;
+        margin-left: 38%;
+        margin-top: -21%;
 
+}
+
+
+.A1{
+    position: absolute;
+    margin-left: -17.8%;
+    margin-top: -32%;
+
+}
+.A{
+   
+ margin-right: 45%;
+ margin-top: 2%;
+}
+.B{
+    margin-top:-3%;
+    margin-left: -39.8%;
+}
+.C{
+    margin-left: -42.8%;
+    margin-top:-4%
+}
+.D{
+    margin-left: -18%;
+    margin-top: -3%;
+}
+.E{
+    margin-left: -36%;
+    margin-top:-0.1%
+}
+.a1{
+    margin-top: 3%;
+}
 .a{
-    margin-left: -6%;
-    margin-top: -2px;
+    margin-left: -0.2%;
+    margin-top: -3px;
 
-}   
+}  
+.EE{
+    margin-top: 6%;
+} 
+.FF{
+    margin-top: 6%;
+}
+.GG{
+    margin-top:6%;
+}
 .b{
-    margin-left: -6%;
-    margin-top: -2%;
+    margin-left: -1%;
+    margin-top: -1%;
    
 }
 .c{
     
-    margin-left: -40%;
+    margin-left: -1%;
     margin-top: -20px;
-
+    
 }
+
 .d{
-    margin-top: 9%;
-    margin-left: -40%;
+    margin-top: 5%;
+    margin-left: -1%;
 }
 .e{
-    margin-left: -8%;
-    margin-top: -2px;
+    position: absolute;
+    margin-left: -17.8%;
+    margin-top: -32.4%;
 
 }
 .f{
-    margin-left: -6%;
-    margin-top: -2%;
+    position: absolute;
+    margin-left: -17.8%;
+    margin-top: -29%;
 
 }
 .g{
-    margin-left: -50%;
-    margin-top: -20px;
+    position: absolute;
+    margin-left: -17.8%;
+    margin-top: -26%;
 
     
 }
 .h{
-    margin-top: 9%;
-    margin-left: -50%;
+    margin-top: -18.3%;
+    margin-left: -17.8%;
 }
 .i{
-    margin-left: -5%;
+    margin-left: -12%;
+    margin-top:-7%;
 
 }
 .j{
-    margin-top:-0.5%
+    position: absolute;
+    margin-top:-18%;
+    margin-left: 38%;
 }
+.J{
+    position: absolute;
+    margin-top:-18%;
+    margin-left: 38%;
+
+}
+
 .l{
-    margin-top:-3%;
+    position: absolute;
+    margin-top:-7%;
+    margin-left: 38%;
+}
+.I{
+    position: absolute;
+    margin-top:-7%;
+    margin-left: 38%;
 }
 .k{
-    margin-top:9%
+   position: absolute;
+    margin-top: -10%;
+    margin-left: 38%;
 }
+.K{
+    position: absolute;
+    margin-top: -10%;
+    margin-left: 38%;
+
+}
+
+
 .m{
-    margin-top: 9%;
-    margin-left: 4%;
+    position: relative;
+    margin-top: 6%;
+    margin-left:30%;
+    width: 700px;
+}
+.M{
+    position: absolute;
+    margin-top: 1%;
+    margin-left:37.6%;
+    width: 700px;
+
+}
+.moveee{
+    margin-left: -22%;
+    margin-top: -0.2%;
+}
+.movee{
+    margin-top: 0.1%;
+    margin-left: -41%;
 }
 .n{
-    margin-left: -13%
+    margin-left: 9%;
+    margin-top:  24%;
+    font-size: 17px;
 }
 .front_manager_box{
+    height: 300px;
+    background-image: url(front2.png);
+    background-repeat: no-repeat;
+    background-size: 36%;
+    background-position: 0% -10%;
     position: absolute;
-    margin-top: 80%;
+    margin-top: 45%;
     margin-left: 5%;
     color: #FFF;
 text-align: center;
@@ -162,6 +381,31 @@ line-height: normal;
 
 }
 .Backend_Manager_box1{
+    width: 680px;
+    height: 300px;
+    background-image: url(back2.png);
+    background-repeat: no-repeat;
+    background-size: 36%;
+    background-position: 0% -10%;
+    position: absolute;
+    margin-top: 46%;
+    margin-left: 5%;
+    color: #FFF;
+text-align: center;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+
+}
+.Backend_Manager_box2{
+    width: 680px;
+    height: 300px;
+    background-image: url(back3.png);
+    background-repeat: no-repeat;
+    background-size: 36%;
+    background-position: 0% -10%;
     position: absolute;
     margin-top: 80%;
     margin-left: 5%;
@@ -172,26 +416,10 @@ font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
-justify-content: center;
+
 
 }
-.Backend_Manager_box2{
-    position: absolute;
-    margin-top: 144%;
-    margin-left: 5%;
-    color: #FFF;
-text-align: center;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-justify-content: center;
 
-}
-.manager{
-    font-size: 20px;
-}
 .move{
     position: absolute;
     margin-top: -1%;
@@ -209,10 +437,11 @@ justify-content: center;
 .container{
     display: flex;
     justify-content: space-around;
+    height: 1000px;
 
 }
 .Backend_Manager{
-    margin-left: 53%;
+    margin-left: -74%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -229,43 +458,114 @@ justify-content: center;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 3%;
+    margin-top: 75%;
+
+}
+.Backend_Manager_1{
+    margin-left: -73.5%;
+    position: absolute;
+    display: flex;
+    width: 288px;
+    height: 91px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
+    font-family: Inter;
+    font-size: 23.4px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 76.9%;
+
+
+}
+.Design_Manager{
+    margin-left: -75%;
+    position: absolute;
+    display: flex;
+    width: 288px;
+    height: 91px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
+    font-family: Inter;
+    font-size: 23.4px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 177%;
+
+
+}
+.Design_manager_1{
+    margin-left: -73.5%;
+    position: absolute;
+    display: flex;
+    width: 288px;
+    height: 91px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
+    font-family: Inter;
+    font-size: 23.4px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 179%;
 
 }
 .Backmanager1{
-    font-size: 20px;
-    margin-left: -5%;
+    font-size: 24px;
+    margin-left :24%;
+    margin-top: -2% ;
 
 }
 .Backmanager2{
-    font-size: 20px;
-    margin-left: -13%;
+    font-size: 24px;
+    margin-left :24%;
+    margin-top: -2% ;
 
 }
 .Backend_box{
-    width: 600px;
-    height: 3000px;
+    position: absolute;
+    width: 1150px;
+    height: 400px;
     flex-shrink: 0;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.50);
-   margin-top: 12%;
-   margin-left: 3%;
-   background: url(back1.png),url(back2.png),url(back3.png);
-   background-size: 30%,30%,30%;
-   background-repeat: no-repeat,no-repeat,no-repeat;
-   background-position: center 4%,center 30%,center 60%;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;
+   margin-top: 84%;
+   margin-left: -3%;
+   background: url(back1.png);
+   background-size: 23%;
+   
+  border-radius: 20px;
+   background-repeat: no-repeat,no-repeat;
+   background-position: 90% center;
+   fill: #282828;
    
 
 }
 .Backend_Reader{
     color: #83C586;
-text-align: center;
-font-family: Inter;
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-position: absolute;
-margin-top: 24%;
-margin-left: 17%;
+    text-align: center;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 10%;
 
 }

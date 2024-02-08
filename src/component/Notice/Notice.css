@@ -1,7 +1,7 @@
 .main_container {
   display: flex;
   justify-content: space-around;
-  height: 640px;
+  height: 1000px;
 }
 
 
@@ -12,10 +12,11 @@
   background-color: #F29827;
 }
 .common{
- 
+  position: absolute;
+ margin-top: -23%;
   display: flex;
   justify-content: center;
-  margin-left: 10%;
+  margin-left: 12.5%;
   color: #F29827;
   text-align: center;
   font-family: Inter;
@@ -51,8 +52,94 @@
   font-weight:700 ;
   line-height: normal;
 }
+.Tool-box{
+  display: flex;
+  width: 400px;
+  height: 200px;
+  flex-shrink: 0;
+  margin-left: 10vw;
+  box-shadow: 4px 4px 10px rgba(0, 0, 10, 0.5);
+  border-radius: 5%;
+  transform: translateZ(20px);
+  border: 10px solid #282828;
+  position: absolute;
+ background-image: url(fig.png),url(photo.png),url(ai.png);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 17% center,  50% center, 85% center;
+  background-size: 12%, 15%, 15%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: -18%;
+  margin-left: 64%;
+  position: absolute;
+}
 
+.Tool-box h4{
+  display: flex;
+  flex-direction: column;
+  color: #F29827;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: auto;
+  margin-right: 14px;
+
+}
+
+.Design-box{
+  display: flex;
+  width: 400px;
+  height: 200px;
+  flex-shrink: 0;
+  margin-left: 10vw;
+  box-shadow: 4px 4px 10px rgba(0, 0, 10, 0.5);
+  border-radius: 5%;
+  transform: translateZ(20px);
+  border: 10px solid #282828;
+  position: absolute;
+ background-image: url(User.png),url(branding.png);
+  background-repeat: no-repeat no-repeat;
+  background-position: 20% center,  80% center;
+  background-size: 16%, 37% ;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: -18%;
+}
+.Design-Thinking{
+  position: absolute;
+  margin-top: -70%;
+   display: flex;
+   justify-content: center;
+   margin-left: 1%;
+   color: #F29827;
+   text-align: center;
+   font-family: Inter;
+   font-size: 28px;
+   font-style: normal;
+   font-weight:700 ;
+   line-height: normal;
+}
+.Design-Tool{
+  position: absolute;
+  margin-top: -22.5%;
+   display: flex;
+   justify-content: center;
+   margin-left: 73%;
+   color: #F29827;
+   text-align: center;
+   font-family: Inter;
+   font-size: 28px;
+   font-style: normal;
+   font-weight:700 ;
+   line-height: normal;
+}
 .common-box {
+  margin-top:-57%;
  
   display: flex;
   width: 400px;
@@ -66,7 +153,7 @@
   background-image: url(notice.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 40%;
+  background-size: 50%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -126,7 +213,19 @@
 .Back-End-box.DRF{
   margin-right : -8%;
 }
-
+.Design-box h4{
+  display: flex;
+  flex-direction: column;
+  color: #F29827;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-top: auto;
+  margin-right: 14px;
+}
 .common-box h4 {
   display: flex;
   flex-direction: column;
@@ -182,7 +281,23 @@
 .Front-End-box h4.type{
   margin-left: 6%;
 }
+.line__4{
+position: absolute;
+  width: 202px;
+  height: 1.5px;
+margin-top: -11%;
+margin-left: 44%;
+  background-color: #F29827;
+}
+.v2::before{
+  content: '>';
+  position: absolute;
+  font-size: 24px;
+  margin-left: 803px;
+  margin-top:-171px;
+  color: #F29827;   
 
+}
 
 .line__2 {
   position: absolute;
@@ -258,4 +373,47 @@
   position: absolute;
   top: 75vh;
 }
-
+.Back-group{
+  margin-top: -64%;
+}
+.CSS{
+  margin-bottom: -28%;
+  margin-left: -33%;
+  position: absolute;
+}
+.HTML{
+  margin-bottom: -28%;
+  margin-left: 4%;
+  position: absolute;
+}
+.JS{
+  margin-bottom: -28%;
+  margin-left: 45%;
+  position: absolute;
+  
+}
+.User{
+  position: absolute;
+  margin-left: -47%;
+  margin-bottom: -26%;
+}
+.Branding{
+ position: absolute;
+  margin-left: 40%;
+  margin-bottom: -26%;
+}
+.Photoshop{
+  position: absolute;
+  margin-left: 4%;
+  margin-bottom: -26%;
+}
+.Figma{
+  margin-bottom: -26%;
+  margin-left: -54%;
+  position: absolute;
+}
+.IIIIustrator{
+  margin-bottom: -26%;
+  margin-left: 64%;
+  position: absolute;
+}

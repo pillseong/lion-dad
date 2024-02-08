@@ -401,7 +401,7 @@ function Board() {
           <>
             <div className="slider_button_container">
               <button onClick={handleSliderPrev}><img className="slider__left__button" src={leftButton} alt="Left Button" /></button>
-              <button onClick={handleSliderNext}><img src={rightButton} alt="Right Button" /></button>
+              <button onClick={handleSlgiderNext}><img src={rightButton} alt="Right Button" /></button>
             </div>
             <div className="Board_table">
               <Slider {...slickSettings} ref={sliderRef}>
@@ -469,7 +469,7 @@ function Board() {
                           <div>
                             {userDivision === "admin" || post.author.student_id === student_Id ? (
                               <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
-                                🔨
+                              
                               </button>
                             ) : (
                               null

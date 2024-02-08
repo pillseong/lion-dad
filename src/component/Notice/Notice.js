@@ -48,7 +48,7 @@ function Notice() {
         </div>
 
         <div className='right'>
-          
+          <div className='Back-group'>
           <h2 className='Back-End'>Back End</h2>
           <div className='Back-End-box'>
           <div className="Back-End-image1"></div>
@@ -59,6 +59,8 @@ function Notice() {
               <h4 className='DRF'>DRF</h4>
             
           </div>
+          </div>
+          <div className='Front-group'>
           <h2 className='Front-End'>Front End</h2>
           <div className='Front-End-box'>
             <h4 className='js심화'>JS(심화)</h4>
@@ -66,7 +68,22 @@ function Notice() {
             <h4 className='type'>TypeScript</h4>
           </div>
         </div>
+        </div>
+        </div>
+        <div className='Design-box'>
+          <h2 className='Design-Thinking'>Design-Thinking</h2>
+          <h4 className='User'>User</h4>
+          <h4 className='Branding'>Branding</h4>
+
       </div> 
+      <div className='line__4'></div>
+      <div className='v2'></div>
+      <h2 className='Design-Tool'>Design Tool</h2>
+    <div className='Tool-box'>
+    <h4 className='Figma'>Figma</h4>
+    <h4 className='Photoshop'>Photoshop</h4>
+    <h4 className='IIIIustrator'>IIIIustrator</h4>
+    </div>
     </>
   );
 }
