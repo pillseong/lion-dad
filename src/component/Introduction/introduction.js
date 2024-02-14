@@ -37,6 +37,8 @@ function Introduction() {
   const [studentInfo, setStudentInfo] = useState(null);
   const student_id = "20201776";
 
+  const navigate = useNavigate();
+
   const setEditingIdInLocalStorage = (id) => {
     localStorage.setItem('editingId', id);
   };
@@ -212,6 +214,10 @@ function Introduction() {
   };
 
   console.log(notices);
+  const handleWriteButtonClick = () => {
+    // 여기서 선택된 게시판 정보를 state로 넘겨줍니다.
+    navigate('/introductionWrite');
+  };
 
   return (
     <div className='parent-div'>
@@ -220,51 +226,56 @@ function Introduction() {
       <HeaderLogo />
 
       <div className='introduction_main_container'>
+        <div className='intro_tum'></div>
         <div className='intro'>
           <div>
             <span className='Lion'>Lion </span>
             <span className='title'>공지사항</span>
           </div>
-          <Link className='write_button' to="/IntroductionWrite">+</Link>
+          <button onClick={handleWriteButtonClick} className='introduction__write__button'>+</button>
         </div>
         <div className='intro_line'></div>
         <div className="swiper-container">
+        <div className="slider_button_container__2">
+              <button onClick={handleSliderPrev}><img className="slider__left__button__2" src={leftButton} alt="Left Button" /></button>
+              <button onClick={handleSliderNext}><img className="slider__right__button__2" src={rightButton} alt="Right Button" /></button>
+            </div>
           <div className="swiper-e">
             {/* 상단 슬라이더 */}
             <Slider {...introduction_slickSettings} ref={sliderRef}>
-              {notices.map((notice, index) => (
-                  <div key={notice.id} className='main_introduction' onClick={() => openModal(notice)}>
-                    <div className='sub_introduction'>
-                      <span className='introduction__id'>{notice.id}</span>
-                      <span className='introduction__title'>{formatNoticeTime(notice.notice_title)}</span>
-                      <span className='introduction__time'>{notice.notice_time}</span>
-                    </div>
-                    <Link className='edit__button'
-                      to={`/edit-notice/${notice.id}`}
-                      onClick={() => setEditingIdInLocalStorage(notice.id)}
-                    >
-                      ❌
-                    </Link >
-                    <button className='del__button' onClick={() => handleDelete(notice.id)}>🔨</button>
+            {notices.map((notice, index) => (
+              <div key={notice.id} className='main_introduction' onClick={() => openModal(notice)}>
+                <div className='sub_introduction'>
+                    <span className='introduction__id'>{notice.id}</span>
+                    <span className='introduction__title'>{notice.notice_title}</span>
+                    <span className='introduction__time'>{formatNoticeTime(notice.notice_time)}</span>
+                </div>
+                <div className='gimojji'>
+                  <div className='introduction__side__button'>
+                      <Link className='board__admin__del__button'
+                          to={`/edit-notice/${notice.id}`}
+                          onClick={() => setEditingIdInLocalStorage(notice.id)}
+                      >
+                          ❌
+                      </Link >
                   </div>
-                
+                </div>
+            </div>
               ))}
             </Slider>
           </div>
         </div>
-        <div className="slider_button_container">
-              <button onClick={handleSliderPrev}><img className="slider__left__button" src={leftButton} /></button>
-              <button onClick={handleSliderNext}><img src={rightButton} /></button>
-            </div>
+
 
 
         {isModalOpen && (
           <div className="modal-overlay" onClick={closeModal}>
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-              <h3>{modalData.notice_title}</h3>
-              <p>{modalData.notice_comment}</p>
+            <div className="modal" onClick={(e) => e.stopPropagation()} style={{ width: '51%', height: '75%' , background: '#282828'}}>
+              <h3 className='introduction__modal__title'>{modalData.notice_title}</h3>
+              <span className='introduction__modal__time'>작성일자 : {formatNoticeTime(modalData.notice_time)}</span>
+              <div className='introduction__modal__header__line'></div>
               {modalData.fileUrl && (
-                <div>
+                <div className='introduction__modal__img'>
                   {modalData.fileUrl.endsWith('.pdf') ? (
                     <embed src={modalData.fileUrl} type="application/pdf" width="600" height="400" />
                   ) : (
@@ -272,7 +283,9 @@ function Introduction() {
                   )}
                 </div>
               )}
-              <button onClick={closeModal}>닫기</button>
+              <p className='introduction__modal__content'>{modalData.notice_comment}</p>
+                <button onClick={closeModal} className='introduction__modal__close__button'>닫기</button>
+              {/* <button>수정하기</button> */}
             </div>
           </div>
         )}

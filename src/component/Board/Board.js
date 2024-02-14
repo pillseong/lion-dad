@@ -35,8 +35,6 @@ function Board() {
   const [address, setAddress] = useState('http://13.124.78.53/qna/questions'); // 초기 주소 설정
   const navigate = useNavigate();
 
- 
-
   useEffect(() => {
     const fetchBoardData = async () => {
       try {
@@ -47,7 +45,7 @@ function Board() {
       }
     };
     fetchBoardData();
-  }, [showMyPosts]);
+  }, [showMyPosts, address, studentId]);
 
   //----------------------------------------
 
@@ -122,13 +120,11 @@ function Board() {
   const setBoardType = (type) => {
     setSelectedBoard(type);
   };
+
   const handleBoardTypeChange = (type) => {
     setBoardType(type);
     setAddress(`http://13.124.78.53/${type}/questions`);
-  
-    
   };
- 
 
   const handleMyPostsCheckboxChange = () => {
     setShowMyPosts(!showMyPosts);
@@ -150,6 +146,8 @@ function Board() {
     try {
       const response = await axios.get(`${address}/${postId}/`);
       setPostDetails(response.data);
+      console.log(response.data);
+      console.log("여기맞제?");
 
       const answerResponse = await axios.get(`${address}/${postId}/answers/`);
       setAnswers(answerResponse.data);
@@ -179,6 +177,7 @@ function Board() {
   };
 
   const addAnswer = async () => {
+    fetchPostDetails
     if (selectedPost && comment.trim() !== '') {
       try {
         await axios.post(`${address}/${selectedPost}/answers/`, {
@@ -187,6 +186,7 @@ function Board() {
         });
         const response = await axios.get(`${address}/${selectedPost}/answers/`);
         const getanswerdata = response.data;
+        console.log(response.data);
 
         setAnswers(getanswerdata);
 
@@ -303,6 +303,10 @@ function Board() {
   };
 
   //---------------스와이퍼부분
+  const formatNoticeTime = (rawTime) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false };
+    return new Date(rawTime).toLocaleDateString('ko-KR', options);
+  };
 
   
 
@@ -321,14 +325,12 @@ function Board() {
   };
 
   const slickSettings = {
-    dots: true,
+    dots: false,
     slidesToShow: 1,
     slidesToScroll: 1,
     slidesPerRow: 4, 
-    arrows: true, 
-    infinite: true,
+    arrows: false, 
     infinite: false,
-    dots: true,
     responsive: [
       {
         breakpoint: 768,
@@ -340,6 +342,7 @@ function Board() {
     ],
   };
   //---------------스와이퍼부분
+
   const qnaButtonRef = useRef(null);
   const freeButtonRef = useRef(null);
 
@@ -369,6 +372,9 @@ function Board() {
       }
     }
   };
+
+
+
   return (
     <>
       <div  className="board__logoHeader">
@@ -381,16 +387,8 @@ function Board() {
           <span className='Board_Lion_title'>Lion</span>
           <span className="Board__title">{`${selectedBoard}게시판`}</span>
           <div className="Board_buttons">
-            <button className="board__qna__button" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
+          <button className="board__qna__button" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
             <button className="board__free__button" id="freeButton" onClick={() =>  handleButtonClick(freeButtonRef)}>자유게시판</button>
-            {/* <label>
-              <input
-                type="checkbox"
-                checked={showMyPosts}
-                onChange={handleMyPostsCheckboxChange}
-              />
-              내가 쓴 글
-            </label> */}
           </div>
         </div>
         <button onClick={handleWriteButtonClick} className='write_button'>+</button>
@@ -401,7 +399,7 @@ function Board() {
           <>
             <div className="slider_button_container">
               <button onClick={handleSliderPrev}><img className="slider__left__button" src={leftButton} alt="Left Button" /></button>
-              <button onClick={handleSlgiderNext}><img src={rightButton} alt="Right Button" /></button>
+              <button onClick={handleSliderNext}><img src={rightButton} alt="Right Button" /></button>
             </div>
             <div className="Board_table">
               <Slider {...slickSettings} ref={sliderRef}>
@@ -411,17 +409,17 @@ function Board() {
                       <div className="board_swiper_container" onClick={() => handlePostClick(post.id)}>
                         <div className='board_swiper_left'>
                           <div className='board_swiper_left_id'>{post.id}</div>
-                          <div className='board_swiper_left_title'>{post.title}{post.content}</div>
+                          <div className='board_swiper_left_title'>{post.title}</div>
                         </div>
                         <div className='board__write__name'>
                           {userDivision == "admin" ? post.author.name : ''}
                           <div className='board__write__time'>
-                            {post.created_at.split('T')[0]}
+                            {formatNoticeTime(post.created_at)}
                           </div>
                         </div>
-                        <div>
+                        <div className='gimojji'>
                           <div className='board__del__edit__button'>
-                            {userDivision === "admin" ? (
+                            {userDivision === "front admin" ? (
                               <button className="board__admin__del__button" onClick={(event) => deletePost(event)}>
                                 ❌
                               </button>
@@ -430,7 +428,7 @@ function Board() {
                             )}
                           </div>
                           <div>
-                            {userDivision === "admin" || post.author.student_id === student_Id ? (
+                            {userDivision === "front admin" || post.author.student_id === student_Id ? (
                               <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
                                 🔨
                               </button>
@@ -440,6 +438,7 @@ function Board() {
                           </div>
                         </div>
                       </div>
+                      {/* 원 나갔지롱 */}
                     </div>
                   )) : 
                   board.reverse().map((post, index) => (
@@ -469,7 +468,7 @@ function Board() {
                           <div>
                             {userDivision === "admin" || post.author.student_id === student_Id ? (
                               <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
-                              
+                                🔨
                               </button>
                             ) : (
                               null
@@ -483,13 +482,18 @@ function Board() {
               </Slider>
             </div>
 
-  
             {selectedPost && board.find((post) => post.id === selectedPost) && isModalOpen && (
-              <>
+              <div className='board__modal__main__container'>
                 <div className="overlay" onClick={closeModal}></div>
-                <div className="modal"  style={{ width: '50%', height: "80%"}}>
-                  <h3 className='modal__title'>{`${postDetails ? postDetails.title : '불러오는 중...'}`}</h3>
-                  <span></span>
+                <div className={`modal ${postDetails && postDetails.answers.length > 3 ? 'with-scroll' : ''}`} style={{ width: '51%', height: '75%' , background: '#282828'}}>
+                  <div className='modal__header__title'>
+                    <h3 className='modal__title'>{`${postDetails ? postDetails.title : '불러오는 중...'}`}</h3>
+                    <div className='modal__creat__time'>
+                      <span>{`작성일자 :  ${postDetails ? postDetails.created_at.split('T')[0] : '불러오는 중...'}`}</span>
+                      <span>{` (${postDetails ? postDetails.created_at.split('T')[1].split(':')[0] : '불러오는 중...'}`}</span>
+                      <span>{` : ${postDetails ? postDetails.created_at.split('T')[1].split(':')[1] : '불러오는 중...'} )`}</span>
+                    </div>
+                  </div>
                   <div className='modal__day__line'></div>
                   {!isEditMode ? (
                     <>
@@ -513,7 +517,8 @@ function Board() {
                   <div>
                     <h3 className='modal__answer__main'>댓글</h3>
                     <div className='modal__answer__liner'></div>
-                      {answers.map((answer) => (
+                      {postDetails  && 
+                        postDetails.answers.map((answer) => (
                         <>
                         <span className='madal__userInfo'>{answer.id}</span>
                         <li key={answer.id} className='modal__answer__answer_main'>
@@ -541,11 +546,27 @@ function Board() {
                             <button className="modal__edit__button"onClick={editComment}>EDIT</button>
                           )}
                         </div>
-                        </div>
                       </div>
-                    <button className="modal__close-button" onClick={closeModal}>X</button>
                     </div>
-              </>
+                    <button className="modal__close-button" onClick={closeModal}>X</button>
+                  </div>
+              </div>
+            )}
+              {isModalOpen && (
+              <div className='modal__answer__container_2'>
+                <div className='modal__answer__input__container_2'>
+                  <span className='modal__answer__input__main'>댓글 작성</span>
+                  <textarea
+                    placeholder="댓글을 입력하세요"
+                    value={comment}
+                    onChange={handleCommentChange}
+                    className='modal__answer__input'
+                  />
+                </div>
+                <div className='modal__plusAndChange_2'>
+                  <button className="modal__add__button" onClick={addAnswer}>ADD</button>
+                </div>
+              </div>
             )}
           </>
         )}

@@ -1,0 +1,86 @@
+.assingment__title {
+    margin-top: 23vh;
+}
+
+.assingment__title__week__header {
+    margin-left: 4.5vw;
+    color: white;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-size: 25px
+}
+
+.task__header__line {
+    margin: 0px 4vw;
+}
+
+.Assingment__weeks__main__container {
+    box-shadow: 4px 4px 10px rgba(0, 0, 10, 0.5);
+    border: 1px solid #282828;
+    border-radius: 30px;
+    list-style-type: none;
+    width: 65vw;
+    height: 30vh;
+    margin-left: 4vw;
+    margin-bottom: 3vh;
+    color: white;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 10px;
+}
+
+.assingment__del__button {
+    position: absolute;
+    margin-left: 70vw;
+    top: 45vh;
+    background-color: #83C586;
+    border: 1px solid #83C586;
+    border-radius: 30px;
+    width: 95px;
+    height: 40px;
+}
+
+.assingment__plus__button {
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 90vw;
+    margin-top: -44px; /* 수직 중앙 정렬을 위한 조정 */
+    background-color: #282828;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    color: #F29827;
+    border: 1px solid #F29827;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 수평 중앙 정렬을 위한 조정 */
+}
+
+.Assingment__img__yo {
+    margin-left: 20px;
+    height: 6vh;
+
+}
+
+.Assingment__li__main__container {
+   
+    display: flex;
+ 
+    justify-content: space-between;
+    margin: 0px 2vw;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 10px;
+  
+    
+}

@@ -3,6 +3,9 @@ import cookie from "react-cookies";
 import axios from "axios";
 import Header from "../Main/header/header";
 import "./Login.css";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Login() {
   const address = "http://192.168.0.4:8080/api/";
@@ -13,7 +16,7 @@ function Login() {
     username: "",
     password: "",
   });
-
+  const navigate=useNavigate()
   const [isRequesting, setIsRequesting] = useState(false);
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
@@ -88,6 +91,8 @@ function Login() {
       });
 
       console.log("Login Response:", loginResponse.data);
+      navigate('/'); //로그인 성공시 메인페이지로 이동
+      
 
     } catch (error) {
       console.error("Error:", error);
@@ -116,7 +121,9 @@ function Login() {
      </div>
         <div className="login_state">
           {/* 폼 제출 시 FormEvent 함수 호출 */}
+          <div className="Login_menu"></div>
           <h2 className="Login">LOGIN</h2>
+          <div className="login_menu">
           <form onSubmit={FormEvent}>
             <label className="Id" htmlFor="id">ID</label>
             {/* 사용자 ID 입력 필드 */}
@@ -138,16 +145,19 @@ function Login() {
               value={userData.password}
               onChange={(e) => changePw(e.target.value)}
               placeholder="Password"
-            />
-            <hr className="Login-line"/>  
-          
+            />  
+            <hr className="Login-line"/> 
+            <div className="state_font_box">
+           <Link  className="state_font1" to="/">Let's join Like lion_12th</Link>
+           <Link  className="state_font2" to="/">Let's introduce Like Lion_12th</Link>
+            </div>
             {/* 로그인 버튼 */}
             <div className="login_Button">
               <button type="submit">LOGIN</button>
             </div>
           </form>
         </div>
-        
+        </div>
       </div>
       <div className="bottom">This page copyrighted to <span>Hanbat University Lion</span> management</div>
     </>

@@ -63,7 +63,7 @@ function IntroductionWrite() {
           },
         });
       }
-      navigate('/introduction'); // 작성 완료 후 /introduction 페이지로 이동
+      navigate('/Introduction'); // 작성 완료 후 /introduction 페이지로 이동
     } catch (error) {
       console.error('Error submitting notice:', error.response?.data); // 에러 응답 메시지 확인
     }
@@ -84,13 +84,15 @@ function IntroductionWrite() {
     fileInput.click();
   };
 
+  
+
   return (
     <>    
     <MenuHeader />
     <LogoHeader />
     <div className="introduction-write-container">
       {/* <Header /> */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='introduction__write__container'>
         <label className='introduction_title_write_name'>공지사항 제목</label>
         <input className="introduction_title_write" type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
 
@@ -101,17 +103,7 @@ function IntroductionWrite() {
           className='introduction_content_write'
           rows={10} // 원하는 높이로 조절
         />
-        {/* <label>공지사항 내용</label>
-        <CKEditor
-          editor={ClassicEditor}
-          data={content}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setContent(data);
-          }}
-        /> */}
 
-        {/* 추가: 파일 업로드 */}
         <div className="file-upload-container">
           <div className='file_container'>
             <img className="file_img" src={File_img} onClick={handleFileUpload} />
