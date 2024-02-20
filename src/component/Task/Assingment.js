@@ -15,10 +15,7 @@ const Assignment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [userTaskData, setUserTaskData] = useState([]);
-  const [parms, setParms] = useState({
-    student_id: 20201816,
-    weeks: 0,
-  });
+ 
   const [assignment, setAssignments] = useState([]);
   const [weekList, setWeekList] = useState([]);
   const [weekCount, setWeekCount] = useState([]);
@@ -70,7 +67,7 @@ const Assignment = () => {
   const assignmentdelete = async (assignmentId) => {
     try {
       await axios.delete(`${address}/assignment/${assignmentId}/`, { data: { student_id }});
-      navigate('/assignment');
+      navigate(`/Task`);
     } catch (error) {
       console.error('Error deleting assignment:', error);
     }
@@ -157,6 +154,9 @@ const Assignment = () => {
       t.assignment_title === item.assignment_title && t.file === item.file
     ))
   );
+  const bboolean = urlNumber + 1;
+  const juyongItems = uniqueItems.filter(item => item.weeks == bboolean);
+  console.log(juyongItems);
 
   return (
     <>
@@ -168,16 +168,16 @@ const Assignment = () => {
         <Link className="assingment__plus__button" to={`/TaskEdit/${urlNumber}`}>+</Link>
         <div className='task__header__line'></div>
         <ul>
-          {uniqueItems.map((item, index) => (
+          {juyongItems.map((item, index) => (
             <li key={item.assignment_id} className='Assingment__weeks__main__container'>
               <img className="Assingment__img__yo" src={taskImg} alt="Assignment Thumbnail" />
               <div className='Assingment__li__main__container'>
                 <p>File: {student_Id}.{item.file.split('/').pop().split('.').pop()}</p>
                 <p>{item.submission_time.split("T")[0].replace(/-/g, ".")}</p>
               </div>
-              <button className="assingment__del__button" onClick={() => assignmentdelete(item.assignment_id)}>EDIT</button>
+              <button className="assingment__del__button" onClick={() => assignmentdelete(item.week_id)}>EDIT</button>
             </li>
-          ))}
+          ) )}
         </ul>
       </div>
     </>

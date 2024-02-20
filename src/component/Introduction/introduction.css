@@ -85,7 +85,8 @@
 
 .introduction__write__button {
   position: absolute;
-  margin-left: 88vw; /* 우측 여백이 7vw이므로 전체 화면 너비(100vw)에서 7vw만큼 뺀 값 */
+  margin-left: 85.2vw; /* 우측 여백이 7vw이므로 전체 화면 너비(100vw)에서 7vw만큼 뺀 값 */
+  margin-top: -0.5%;
   background-color: #282828;
   width: 30px;
   height: 30px;
@@ -140,7 +141,7 @@
 .slider_button_container__2 {
   /* 버튼 위치 조정을 위한 스타일 */
   position: relative;
-  left: 45%;
+  left: 4%;
 }
 
 .slider__left__button__2 {
@@ -261,7 +262,7 @@ margin-right: 120%;
     position: absolute;
     top: 65vh;
     display: flex;
-    left: 20vw;
+    left: 21vw;
     
 }
 .slider_button_container__2 button {
@@ -414,8 +415,18 @@ display: flex;
 align-items: center;
 }
 
-.board__admin__del__button {
-text-decoration: none;
+.board__admin__del__button__yo {
+  text-decoration: none;
+  margin-bottom: 10px;
+  border: 1px solid red;
+  border-radius: 50px;
+  background-color: #282828;
+  padding: 5px;
+  color: red;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 .introduction__modal__title {

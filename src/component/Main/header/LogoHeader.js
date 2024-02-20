@@ -23,7 +23,6 @@ function LogoHeader()  {
         setAccessToken(savedAccessToken);
         setRefreshToken(savedRefreshToken);
   
-        console.log("Trying to get access token...");
   
         const getAccessTokenResponse = await axios.post(
           `${LoginAddress}`,
@@ -33,18 +32,12 @@ function LogoHeader()  {
           }
         );
   
-        console.log("Get Access Token Response:", getAccessTokenResponse.data);
         
         // 상태를 업데이트하고 나서 값 확인
         setUserInfo(getAccessTokenResponse.data)
         serUserDivision(getAccessTokenResponse.data.division)
         setStudentId(getAccessTokenResponse.data.username)
         setUserName(getAccessTokenResponse.data.name)
-  
-        console.log("userInfo: ", userInfo);
-        console.log(userDivision, studentId, userName);
-  
-        console.log("Access Token:", getAccessTokenResponse.data.access);
   
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
           path: "/",

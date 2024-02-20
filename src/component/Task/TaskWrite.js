@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
+import cookie from 'react-cookies';
 import { useNavigate } from 'react-router-dom';
 
 import './TaskWrite.css';
@@ -18,6 +19,73 @@ const TaskWrite = () => {
     assignment_type: 'C',
     deadline: '', // 합쳐진 deadline 값
   });
+
+  const LoginAddress = 
+  // "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
+  "http://15.164.190.171/login/";
+
+  const [accessToken, setAccessToken] = useState(null);
+  const [refreshToken, setRefreshToken] = useState(null);
+
+  const [userName, setUserName] = useState(null);
+  const [userDivision, setUserDivision] = useState(null);
+  const [student_Id, setStudent_Id] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const savedAccessToken = cookie.load("accessToken");
+        const savedRefreshToken = cookie.load("refreshToken");
+        setRefreshToken(savedRefreshToken);
+        setAccessToken(savedAccessToken);
+  
+        console.log("Trying to get access token...");
+  
+        const getAccessTokenResponse = await axios.post(
+          `${LoginAddress}`,
+          {
+            access: savedAccessToken,
+            refresh: savedRefreshToken,
+          }
+        );
+  
+        setUserName(getAccessTokenResponse.data.name);
+        setUserDivision(getAccessTokenResponse.data.division);
+        setStudent_Id(getAccessTokenResponse.data.username)
+        console.log(getAccessTokenResponse.data.name);
+        console.log(getAccessTokenResponse.data.username);
+        console.log(getAccessTokenResponse.data.division);
+
+        
+        
+        cookie.save("accessToken", getAccessTokenResponse.data.access, {
+          path: "/",
+          expires: new Date(getAccessTokenResponse.data.expires),
+        });
+      } catch (error) {
+        console.error("Error checking access token:", error);
+      }
+    };
+  
+    // Call fetchData function
+    fetchData();
+  }, []); // Empty dependency array for the initial render only
+
+  useEffect(() => {
+    const fetchDataWrapper = async () => {
+      const savedAccessToken = await cookie.load('accessToken');
+      const savedRefreshToken = await cookie.load('refreshToken');
+
+      setAccessToken(savedAccessToken);
+      setRefreshToken(savedRefreshToken);
+
+
+      // Assuming fetchData is a function that you've defined elsewhere
+      // await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
+    };
+
+    fetchDataWrapper();
+  }, []);
 
   const handleCreateAssignment = () => {
     // deadlineDate와 deadlineTime을 합쳐서 deadline으로 설정

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
-import Header from "../Main/header/header";
+
 import "./Login.css";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -61,7 +60,7 @@ function Login() {
     event.preventDefault();
 
     if (isRequesting) {
-      console.log("Login request is already in progress. Ignoring.");
+    
       return;
     }
 
@@ -90,7 +89,6 @@ function Login() {
         expires: new Date(loginResponse.data.refresh),
       });
 
-      console.log("Login Response:", loginResponse.data);
       navigate('/'); //로그인 성공시 메인페이지로 이동
       
 
@@ -112,7 +110,7 @@ function Login() {
   return (
     <>
   
-      
+      <div className="login_body">
       <div className="login_Border">
      <div className="login_title">
       <h2>LIKE LION</h2>
@@ -148,8 +146,8 @@ function Login() {
             />  
             <hr className="Login-line"/> 
             <div className="state_font_box">
-           <Link  className="state_font1" to="/">Let's join Like lion_12th</Link>
-           <Link  className="state_font2" to="/">Let's introduce Like Lion_12th</Link>
+           <a className="state_font1" href="https://forms.gle/smFDKNMACwrsK1JMA">Let's join Like lion_12th</a>
+           <Link  className="state_font2" to="/Notice">Let's introduce Like Lion_12th</Link>
             </div>
             {/* 로그인 버튼 */}
             <div className="login_Button">
@@ -160,6 +158,7 @@ function Login() {
         </div>
       </div>
       <div className="bottom">This page copyrighted to <span>Hanbat University Lion</span> management</div>
+      </div>
     </>
   );
 }

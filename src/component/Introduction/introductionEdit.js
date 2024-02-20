@@ -30,7 +30,6 @@ function IntroductionEdit() {
     const fetchNotice = async () => {
       try {
         const response = await axios.get(`${address}notice/${lastSegment}/`, { data: { student_id }});
-        console.log(response.data); // 확인용 로그 추가
         setTitle(response.data.notice_title);
         setContent(response.data.notice_comment);
         setFile(response.data.file || null);

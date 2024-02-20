@@ -205,6 +205,7 @@ body.modal-open {
 .board_line {
 
   margin-top: 7vh;
+  margin-bottom: 4.3vh;
   margin-left: 3vw;
   margin-right: 3vw;
   background-color: #F29827;
@@ -375,8 +376,8 @@ body.modal-open {
 
 .slider_button_container {
   position: absolute;
-  top: 85vh;
-  left: -30px;
+  top: 85.4vh;
+  left: 8px;
 }
 
 .slider_button_container button {
@@ -473,5 +474,21 @@ body.modal-open {
     transform: translateY(-12px);
   }
 }
-  
 
+.author_name {
+  position: absolute;
+  width: 4vw;
+  right: 5vw;
+  margin-left: 10vw;
+}
+
+.board__write__name {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.board__write__time {
+  width: 15vw;
+  right: 30vw;
+}

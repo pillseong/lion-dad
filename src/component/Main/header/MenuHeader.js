@@ -40,7 +40,6 @@ const MenuHeader = () => {
         setRefreshToken(savedRefreshToken);
         setAccessToken(savedAccessToken);
 
-        console.log("Trying to get access token...");
 
         const getAccessTokenResponse = await axios.post(
           `${LoginAddress}`,
@@ -52,9 +51,6 @@ const MenuHeader = () => {
         setUserName(getAccessTokenResponse.data.name);
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
-        console.log(getAccessTokenResponse.data.name);
-        console.log(getAccessTokenResponse.data.username);
-        console.log(getAccessTokenResponse.data.division);
 
 
         cookie.save("accessToken", getAccessTokenResponse.data.access, {

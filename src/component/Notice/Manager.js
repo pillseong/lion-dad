@@ -1,5 +1,4 @@
 import React from 'react';
-import{Link} from 'react-router-dom';
 import './Manager.css';
 import Headers from'./headers/headers'
 import LogoHeader from '../Main/header/LogoHeader';
@@ -40,7 +39,7 @@ function Manager() {
         <p className='h'>한밭대학교 멋사 12기 부회장 및 백앤드장을 맡고 있는채성수입니다. 아주 쉽게 백앤드<br/>에와 서버 대해 알려주도록 하겠습니다.</p></h3></div>
         <div className='Backend_Manager_box1'>
         <div className='Backmanager1'>Backend Manager</div>
-        <div className='ex4'><h3 className='i'><p className='A2'>육종범</p> <p className='j'>컴퓨터공학과</p><p className='k'>-관심분야-</p><p className='l'>웹 백앤드(String,Django)</p>
+        <div className='ex4'><h3 className='i'><p className='A2'>육종범</p> <p className='j'>컴퓨터공학과</p><p className='k'>-관심분야-</p><p className='l'>웹 백앤드(Spring,Django)</p>
         <p className='m'>한밭대학교 멋사 12기 백앤드 임원을 맡은 육종범입니다. 열정이 있는 전공자 비전공자<br/> <p className='movee'>누구나 포트폴리오를 쌓도록 도와 드리겠습니다</p></p ></h3></div>
         </div>
         <div className='Backend_Manager_box2'>

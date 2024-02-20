@@ -19,8 +19,6 @@ import rightButton from '../Board/right.png';
 
 function Board() {
   let studentId = parseInt('20201111', 10);
-  let [jjinStudentId, setJjinStudentId] = useState(null);
-  const [selectedBoard, setSelectedBoard] = useState('qna');
   const [selectedPost, setSelectedPost] = useState(null);
   const [comment, setComment] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +26,6 @@ function Board() {
   const [postDetails, setPostDetails] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({ title: '', content: '' });
-  const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
   const [showMyPosts, setShowMyPosts] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
@@ -128,9 +125,7 @@ function Board() {
     setAddress(`http://13.124.78.53/${type}/questions`);
   };
 
-  const handleMyPostsCheckboxChange = () => {
-    setShowMyPosts(!showMyPosts);
-  };
+ 
 
   useEffect(() => {
     const fetchBoardData = async () => {
@@ -255,17 +250,7 @@ function Board() {
     }
   };
 
-  const handleEditClick = (event) => {
-    event.stopPropagation(); // 이벤트 전파 방지
-    if (postDetails) {
-      setIsEditMode(true);
-      setEditedPost({
-        title: postDetails.title || '',
-        content: postDetails.content || '',
-      });
-      setIsModalOpen(true);
-    }
-  };
+
 
   const navigateToEditPage = (postId) => {
     navigate(`/boardEdit/${postId}`);
@@ -310,12 +295,7 @@ function Board() {
 
   // 상단 슬라이더와 하단 슬라이더에 대한 인스턴스 생성
 
-  const handleSwiper = (swiper) => {
-    if (swiper) {
-      setTopSwiper(swiper);
-      setBottomSwiper(swiper);
-    }
-  };
+  
 
   const swiperSettings = {
     spaceBetween: 50,

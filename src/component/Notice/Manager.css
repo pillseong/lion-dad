@@ -6,7 +6,7 @@
     background-color: #F29827;
   }
     .Frontend_Manager{
-        margin-left: -74%;
+        margin-left: -68%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -29,7 +29,7 @@
     .Manager_manager{
     position: absolute;
     margin-top: 3.4%;
-    margin-left: -74%;
+    margin-left: -68%;
         color: #FFF;
     text-align: center;
     text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
@@ -116,7 +116,7 @@ margin-left: 10%;
 .ex1{
     color: #FFF;
 font-family: Inter;
-font-size: 14px;
+font-size: 14.3px;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
@@ -130,7 +130,7 @@ align-content: center;
 .ex6{
     color: #FFF;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 14.3px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -142,14 +142,14 @@ align-content: center;
 
 }
 .ex2{
-    font-size: 14px;
+    font-size: 14.3px;
     margin-top: 2%;
     margin-right: -82%;
 }
 .ex3{
     color: #FFF;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 14.3px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -161,12 +161,15 @@ align-content: center;
     
     
 }
+.ex5{
+    font-size: 14.3px;
+}
 .ex4{
 
     position: absolute;
     color: #FFF;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 14.3px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -441,7 +444,7 @@ line-height: normal;
 
 }
 .Backend_Manager{
-    margin-left: -74%;
+    margin-left: -68.5%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -462,7 +465,7 @@ line-height: normal;
 
 }
 .Backend_Manager_1{
-    margin-left: -73.5%;
+    margin-left: -68%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -484,7 +487,7 @@ line-height: normal;
 
 }
 .Design_Manager{
-    margin-left: -75%;
+    margin-left: -70%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -506,7 +509,7 @@ line-height: normal;
 
 }
 .Design_manager_1{
-    margin-left: -73.5%;
+    margin-left: -68%;
     position: absolute;
     display: flex;
     width: 288px;

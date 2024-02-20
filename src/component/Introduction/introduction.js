@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import IntroductionEdit from './introductionEdit'; 
 import cookie from 'react-cookies';
@@ -34,7 +33,6 @@ function Introduction() {
   const [file, setFile] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
-  const [studentInfo, setStudentInfo] = useState(null);
   const student_id = "20201776";
 
   const navigate = useNavigate();
@@ -63,7 +61,6 @@ function Introduction() {
         setRefreshToken(savedRefreshToken);
         setAccessToken(savedAccessToken);
   
-        console.log("Trying to get access token...");
   
         const getAccessTokenResponse = await axios.post(
           `${LoginAddress}`,
@@ -76,8 +73,6 @@ function Introduction() {
         setUserName(getAccessTokenResponse.data.name);
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
-        console.log(getAccessTokenResponse.data.username);
-        console.log(getAccessTokenResponse.data.division);
         
         
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
@@ -113,7 +108,6 @@ function Introduction() {
     try {
       const response = await axios.get(`${address}notice/`);
       setNotices(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching notices:', error);
     }
@@ -129,7 +123,6 @@ function Introduction() {
   }, []);
 
   const handleDelete = async (id) => {
-    console.log("Deleting ID:", id);
     try {
       await axios.delete(`${address}notice/${id}/`, { data: { student_id }});
       fetchNotices();
@@ -148,7 +141,6 @@ function Introduction() {
           setContent(response.data.content);
           setFile(response.data.file || null);
           setEditingId(id);
-          console.log(response.data);
         } catch (error) {
           console.error('Error fetching notice:', error);
         }
@@ -213,7 +205,6 @@ function Introduction() {
     ],
   };
 
-  console.log(notices);
   const handleWriteButtonClick = () => {
     // 여기서 선택된 게시판 정보를 state로 넘겨줍니다.
     navigate('/introductionWrite');
@@ -252,12 +243,17 @@ function Introduction() {
                 </div>
                 <div className='gimojji'>
                   <div className='introduction__side__button'>
-                      <Link className='board__admin__del__button'
+                      {/* <Link className='board__admin__del__button'
                           to={`/edit-notice/${notice.id}`}
-                          onClick={() => setEditingIdInLocalStorage(notice.id)}
+                          onClick={() => handleDelete(notice.id)}
                       >
                           ❌
-                      </Link >
+                      </Link > */}
+                      <button className='board__admin__del__button__yo'
+                          onClick={() => handleDelete(notice.id)}
+                      >
+                          ❌
+                      </button >
                   </div>
                 </div>
             </div>

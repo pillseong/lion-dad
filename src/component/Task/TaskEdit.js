@@ -9,14 +9,13 @@ import fileImg from '../Introduction/image 3.png';
 
 import LogoHeader from '../Main/header/LogoHeader';
 import MenuHeader from '../Main/header/MenuHeader';
-import Assignment from './Assingment';
+
 
 
 const TaskEdit = () => {
   const address = "https://port-0-likelion-12th-backend-9zxht12blqj9n2fu.sel4.cloudtype.app";
   const navigate = useNavigate();
-  const { weeks } = useParams();
-  const sliderRef = useRef(null);
+ 
 
   const [file, setFile] = useState(null);
   const currentUrl = window.location.href;

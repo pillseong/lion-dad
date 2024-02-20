@@ -1,10 +1,5 @@
 import React from 'react';
-import Header from '../Main/header/header';
 import './Notice.css';
-import Django from './Django.png';
-import DRF from './DRF.png';
-import python from './pyton.png';
-import { Link } from 'react-router-dom';
 import Headers from'./headers/headers'
 import LogoHeader from '../Main/header/LogoHeader';
 import MenuHeader from '../Main/header/MenuHeader';

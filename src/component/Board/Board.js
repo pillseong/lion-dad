@@ -32,7 +32,7 @@ function Board() {
   const [answers, setAnswers] = useState([]);
   const [showMyPosts, setShowMyPosts] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
-  const [address, setAddress] = useState('http://13.124.78.53/qna/questions'); // 초기 주소 설정
+  const [address, setAddress] = useState('http://13.124.78.53/qna/questions');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -69,9 +69,7 @@ function Board() {
         const savedRefreshToken = cookie.load("refreshToken");
         setRefreshToken(savedRefreshToken);
         setAccessToken(savedAccessToken);
-  
-        console.log("Trying to get access token...");
-  
+    
         const getAccessTokenResponse = await axios.post(
           `${LoginAddress}`,
           {
@@ -83,8 +81,7 @@ function Board() {
         setUserName(getAccessTokenResponse.data.name);
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
-        console.log(getAccessTokenResponse.data.username);
-        console.log(getAccessTokenResponse.data.division);
+        studentId = getAccessTokenResponse.data.username;
         
         
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
@@ -146,8 +143,6 @@ function Board() {
     try {
       const response = await axios.get(`${address}/${postId}/`);
       setPostDetails(response.data);
-      console.log(response.data);
-      console.log("여기맞제?");
 
       const answerResponse = await axios.get(`${address}/${postId}/answers/`);
       setAnswers(answerResponse.data);
@@ -186,7 +181,6 @@ function Board() {
         });
         const response = await axios.get(`${address}/${selectedPost}/answers/`);
         const getanswerdata = response.data;
-        console.log(response.data);
 
         setAnswers(getanswerdata);
 
@@ -210,7 +204,6 @@ function Board() {
   const editComment = async () => {
     try {
       const commentToUpdate = answers.find((comment) => comment.id === selectedCommentId);
-      console.log(commentToUpdate);
 
       await axios.put(`${address}/${selectedPost}/answers/${selectedCommentId}/`, {
         student_id: studentId,
@@ -269,9 +262,9 @@ function Board() {
     navigate(`/boardEdit/${postId}`);
   };
 
-  const editPost = async () => {
+  const editPost = async (post) => {
     try {
-      await axios.put(`${address}/${selectedPost}/answers/`, editedPost);
+      await axios.put(`${address}/${selectedPost}/answers/`, post);
       const response = await axios.get(`${address}/${selectedPost}/`);
       const updatedPost = response.data;
 
@@ -412,14 +405,14 @@ function Board() {
                           <div className='board_swiper_left_title'>{post.title}</div>
                         </div>
                         <div className='board__write__name'>
-                          {userDivision == "admin" ? post.author.name : ''}
+                          {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" ? <div className='author_name'>{post.author.name}</div> : ''}
                           <div className='board__write__time'>
                             {formatNoticeTime(post.created_at)}
                           </div>
                         </div>
                         <div className='gimojji'>
                           <div className='board__del__edit__button'>
-                            {userDivision === "front admin" ? (
+                            {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" || post.author.student_id === student_Id ? (
                               <button className="board__admin__del__button" onClick={(event) => deletePost(event)}>
                                 ❌
                               </button>
@@ -428,8 +421,8 @@ function Board() {
                             )}
                           </div>
                           <div>
-                            {userDivision === "front admin" || post.author.student_id === student_Id ? (
-                              <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
+                            {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" || post.author.student_id === student_Id ? (
+                              <button className="board__admin__edit__button" onClick={() => editPost(post.id)}>
                                 🔨
                               </button>
                             ) : (
@@ -449,7 +442,7 @@ function Board() {
                           <div className='board_swiper_left_title'>{post.title}{post.content}</div>
                         </div>
                         <div className='board__write__name'>
-                          {userDivision == "admin" ? post.author.name : '알 수 없는 작성자'}
+                          {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" ? post.author.name : '알 수 없는 작성자'}
                           <div className='board__write__time'>
                             {post.created_at.split('T')[0]}
                             {userDivision}
@@ -457,7 +450,7 @@ function Board() {
                         </div>
                         <div>
                           <div className='board__del__edit__button'>
-                            {userDivision === "admin" ? (
+                            {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" ? (
                               <button className="board__admin__del__button" onClick={(event) => deletePost(event)}>
                                 ❌
                               </button>
@@ -466,8 +459,8 @@ function Board() {
                             )}
                           </div>
                           <div>
-                            {userDivision === "admin" || post.author.student_id === student_Id ? (
-                              <button className="board__admin__edit__button" onClick={() => navigateToEditPage(post.id)}>
+                            {userDivision == "admin" || userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" || post.author.student_id === student_Id ? (
+                              <button className="board__admin__edit__button" onClick={() => editPost(post.id)}>
                                 🔨
                               </button>
                             ) : (
@@ -525,28 +518,12 @@ function Board() {
                           <span className='modal__answer__answer'>{answer.content}</span>
                           <div>
                             <button className="modal__answer__edit" onClick={() => editevent(answer.id)}>수정</button>
+                            
                             <button className="modal__answer__del" onClick={() => deleteAnswer(answer.id)}>-</button>
                           </div>
                         </li>
                         </>
                       ))}
-                      <div className='modal__answer__container'>
-                        <div className='modal__answer__input__container'>
-                          <span className='modal__answer__input__main'>댓글 작성</span>
-                          <textarea
-                            placeholder="댓글을 입력하세요"
-                            value={comment}
-                            onChange={handleCommentChange}
-                            className='modal__answer__input'
-                          />
-                        </div>
-                        <div className='modal__plusAndChange'>
-                          <button className="modal__add__button" onClick={addAnswer}>ADD</button>
-                          {!isEditMode && (
-                            <button className="modal__edit__button"onClick={editComment}>EDIT</button>
-                          )}
-                        </div>
-                      </div>
                     </div>
                     <button className="modal__close-button" onClick={closeModal}>X</button>
                   </div>

@@ -22,6 +22,7 @@
     width: 90%;
     color: white;
     height: 7vh;
+    margin: 0;
 }
 
 .Board_write_content {
@@ -40,6 +41,7 @@
     width: 90%;
     height: 40vh;
     color: white;
+    padding: 10px;
 }
 
 .board_edit_button {

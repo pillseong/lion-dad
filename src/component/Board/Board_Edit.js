@@ -19,7 +19,6 @@ function Board() {
 
   const sliderRef = useRef(null);
   let studentId = parseInt('20201111', 10);
-  let [jjinStudentId, setJjinStudentId] = useState(null);
   const [selectedBoard, setSelectedBoard] = useState('qna');
   const [selectedPost, setSelectedPost] = useState(null);
   const [comment, setComment] = useState('');
@@ -28,7 +27,6 @@ function Board() {
   const [postDetails, setPostDetails] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({ title: '', content: '' });
-  const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState([]);
   const [showMyPosts, setShowMyPosts] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
@@ -249,17 +247,7 @@ function Board() {
     }
   };
 
-  const handleEditClick = (event) => {
-    event.stopPropagation(); // 이벤트 전파 방지
-    if (postDetails) {
-      setIsEditMode(true);
-      setEditedPost({
-        title: postDetails.title || '',
-        content: postDetails.content || '',
-      });
-      setIsModalOpen(true);
-    }
-  };
+  
 
   const navigateToEditPage = (postId) => {
     navigate(`/boardEdit/${postId}`);

@@ -224,9 +224,9 @@ const Task = () => {
             <span className="Task__title">{`${userName}'s 과제`}</span>
           </div>
           <div>
-            {/* {userDivision == "front admin" && ( */}
+            {userDivision == "front admin" || userDivision == "back admin" || userDivision == "design admin" || userDivision == "admin" ? (
                 <button onClick={TaskWriteButton} className='task__create__button__y'>+</button>
-            {/* )} */}
+            ) : ""}
           </div>
         </div>
         <div className='task__header__line'></div>

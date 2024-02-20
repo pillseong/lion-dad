@@ -83,7 +83,6 @@ function Board_Write() {
         setRefreshToken(savedRefreshToken);
         setAccessToken(savedAccessToken);
   
-        console.log("Trying to get access token...");
   
         const getAccessTokenResponse = await axios.post(
           `${LoginAddress}`,
@@ -97,13 +96,10 @@ function Board_Write() {
         setUserName(getAccessTokenResponse.data.name);
         setUserDivision(getAccessTokenResponse.data.division);
         setStudent_Id(getAccessTokenResponse.data.username)
-        console.log(getAccessTokenResponse.data.name, getAccessTokenResponse.data.division, getAccessTokenResponse.data.username);
         setMovieContent((prevContent) => ({
           ...prevContent,
           student_id: parseInt(getAccessTokenResponse.data.username, 10),
         }));
-        console.log(movieContent);
-        console.log("Access Token:", getAccessTokenResponse.data.access);
         cookie.save("accessToken", getAccessTokenResponse.data.access, {
           path: "/",
           expires: new Date(getAccessTokenResponse.data.expires),
@@ -125,8 +121,6 @@ function Board_Write() {
       setAccessToken(savedAccessToken);
       setRefreshToken(savedRefreshToken);
 
-      console.log('Access Token from Cookie:', savedAccessToken);
-      console.log('Refresh Token from Cookie:', savedRefreshToken);
 
       // Assuming fetchData is a function that you've defined elsewhere
       // await fetchData(accessAddress, savedAccessToken, savedRefreshToken, setAccessToken, setRefreshToken);
@@ -144,8 +138,6 @@ function Board_Write() {
         title: movieContent.title,
         content: movieContent.content,
       });
-      console.log(movieContent);
-      console.log(response.data);
 
       setIsEditMode(false);
       setEditingPostId(null);
@@ -153,7 +145,6 @@ function Board_Write() {
 
     } catch (error) {
       console.error('게시물 등록 또는 수정 중 오류 발생:', error);
-      console.log("여기가 문제여");
       console.log(movieContent);
     }
   };
@@ -170,7 +161,6 @@ function Board_Write() {
 
   const handleSubmit = () => {
     if (isEditMode) {
-      console.log('handleEditPost 함수가 정의되지 않았습니다.');
       // handleEditPost();
       navigate('/Board');
     } else {
