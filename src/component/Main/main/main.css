@@ -1,8 +1,4 @@
-body {
-  margin: 0;
-  padding: 0;
-  height: 50vh;
-}
+
 
 .background-image {
   position: absolute !important;
@@ -70,17 +66,18 @@ body {
 
 
 .User__main__container {
+  
   display: flex;
   flex-direction: column;
-  width: 40vw; /* 너비는 그대로 유지 */
-  height: 37vh; /* 높이를 25vh로 수정 */
+  width: 38vw; /* 너비는 그대로 유지 */
+  height: 35vh; /* 높이를 25vh로 수정 */
   flex-shrink: 0;
   border-radius: 30px;
   background: #282828;
   box-shadow: 0px 0px 30px 5px rgba(242, 152, 39, 0.12); /* 그림자 크기는 그대로 유지 */
   position: relative;
   color: white;
-  top: -20vh; /* 위치를 20vh로 조절 */
+  top: 0vh; /* 위치를 20vh로 조절 */
   padding: 8vh; /* 내부 여백은 그대로 유지 */
   margin-left: 100px;
 }
@@ -114,7 +111,7 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
+  height: 10% !important;
   
 }
 
@@ -138,9 +135,9 @@ body {
 
 .MyInfoImg {
   position: absolute;
-  bottom: 0;
+  bottom: -5vh;
   right: -30px; /* Adjust the right property */
-  width: 35px;
+  width: 2.5vw;
   margin: 5px; /* Add margin as needed */
 }
 
@@ -151,19 +148,19 @@ body {
 }
 
 .Logout_button {
-  width: 10vw;
-  height: 9vh;
+  width: 9vw;
+  height: 8vh;
   flex-shrink: 0;
   border-radius: 20px;
   background: #F29827;
   margin-left: 11vw;
-  margin-top: 10vh;
+  margin-top: 15vh;
   color: white;
   font-size: 1.5vw;
 }
 
 .main_header_container {
-margin-top: -30vh !important;
+margin-top:6vh !important;
 width: 1000px;
 margin-left:10%;
 }

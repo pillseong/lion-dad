@@ -132,6 +132,7 @@ function Login() {
               value={userData .student_id}
               onChange={(e) => changeId(e.target.value)}
               placeholder="Student number"
+              className="id__input"
             />
 
             <label className="Pw" htmlFor="pw">Password</label>

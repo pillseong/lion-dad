@@ -41,7 +41,7 @@ function Manager() {
         <div className='Backmanager1'>Backend Manager</div>
         <div className='ex4'><h3 className='i'><p className='A2'>육종범</p> <p className='j'>컴퓨터공학과</p><p className='k'>-관심분야-</p><p className='l'>웹 백앤드(Spring,Django)</p>
         <p className='m'>한밭대학교 멋사 12기 백앤드 임원을 맡은 육종범입니다. 열정이 있는 전공자 비전공자<br/> <p className='movee'>누구나 포트폴리오를 쌓도록 도와 드리겠습니다</p></p ></h3></div>
-        </div>
+        </div>y
         <div className='Backend_Manager_box2'>
         <div className='Backmanager2'>Backend Manager</div>
         <div className='ex5'><h3 className='n'><p className='A3'>서민재</p> <p className='J'>컴퓨터공학과</p><p className='K'>-관심분야-</p><p className='I'>네트워크 보안. 무선통신 보안, 웹보안</p>
