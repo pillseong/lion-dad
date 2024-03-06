@@ -16,6 +16,8 @@
     "@ckeditor/ckeditor5-build-classic": "^40.2.0",
     "@ckeditor/ckeditor5-react": "^6.2.0",
     "axios": "^1.6.3",
+    "bootstrap": "^5.3.3",
+    "react-bootstrap": "^2.10.1",
     "react-cookies": "^0.1.1",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",

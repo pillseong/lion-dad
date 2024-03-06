@@ -14,6 +14,7 @@
 
 .task__header__line {
     margin: 0px 4vw;
+    margin-bottom: 40px !important;
 }
 
 .Assingment__weeks__main__container {
@@ -22,13 +23,13 @@
     border-radius: 30px;
     list-style-type: none;
     width: 65vw;
-    height: 30vh;
+    height: 25vh;
     margin-left: 4vw;
     margin-bottom: 3vh;
     color: white;
     font-family: Inter;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700;   
     line-height: normal;
     padding: 10px;
 }
@@ -42,6 +43,8 @@
     border-radius: 30px;
     width: 95px;
     height: 40px;
+    color: white;
+    font-weight:bold 
 }
 
 .assingment__plus__button {
@@ -49,17 +52,18 @@
     cursor: pointer;
     position: absolute;
     margin-left: 90vw;
-    margin-top: -44px; /* 수직 중앙 정렬을 위한 조정 */
+    margin-top: -60px; /* 수직 중앙 정렬을 위한 조정 */
     background-color: #282828;
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
+    width: 52px;
+    height: 50px;
+    font-size: 50px;
     color: #F29827;
     border: 1px solid #F29827;
     border-radius: 100%;
     display: flex;
     align-items: center;
     justify-content: center; /* 수평 중앙 정렬을 위한 조정 */
+    
 }
 
 .Assingment__img__yo {

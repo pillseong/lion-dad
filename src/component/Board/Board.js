@@ -28,7 +28,7 @@ function Board() {
   const [postDetails, setPostDetails] = useState(null);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedPost, setEditedPost] = useState({ title: '', content: '' });
-  const [answer, setAnswer] = useState('');
+
   const [answers, setAnswers] = useState([]);
   const [showMyPosts, setShowMyPosts] = useState(false);
   const [selectedCommentId, setSelectedCommentId] = useState(null);
@@ -365,20 +365,20 @@ function Board() {
       }
     }
   };
-
-
+  
 
   return (
     <>
-      <div  className="board__logoHeader">
-        <LogoHeader />
+   
+ 
         <MenuHeader />
-      </div>
+        <LogoHeader className="LogoHeader" />
+      
+      
       <div className='tum'></div>
       <div className='choice_button'>
         <div className='Board_main_header_container'>
           <span className='Board_Lion_title'>Lion</span>
-          <span className="Board__title">{`${selectedBoard}게시판`}</span>
           <div className="Board_buttons">
           <button className="board__qna__button" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
             <button className="board__free__button" id="freeButton" onClick={() =>  handleButtonClick(freeButtonRef)}>자유게시판</button>
@@ -396,7 +396,7 @@ function Board() {
             </div>
             <div className="Board_table">
               <Slider {...slickSettings} ref={sliderRef}>
-                {board[0].id > board[1].id ?
+                {board.length > 1 && board[0].id > board[1].id ?
                   board.map((post, index) => (
                     <div key={post.id} className='board_swiper_main_container'>
                       <div className="board_swiper_container" onClick={() => handlePostClick(post.id)}>

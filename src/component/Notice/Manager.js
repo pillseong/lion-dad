@@ -8,9 +8,10 @@ import MenuHeader from '../Main/header/MenuHeader';
 function Manager() {
   return (
     <>
-     <LogoHeader />
+    
       <MenuHeader />
      <Headers state='Manager'/>
+     <LogoHeader />
       <hr className='line'></hr>
     <div className='container'>
     <div className='Frontend_Manager'><h3>Frontend</h3></div>

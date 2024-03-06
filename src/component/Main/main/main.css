@@ -4,12 +4,14 @@
   position: absolute !important;
   top: 0;
   left: 1vw;
+  
+
 }
 
 .Logo_userName {
   position: absolute;
-  top: 58%;
-  left: 10vw;
+  top: 60%;
+  left: 8.5vw;
   transform: translateY(-50%);
   color: #fff;
   white-space: nowrap;
@@ -23,17 +25,17 @@
 }
 
 .lion-logo {
-  width: 7vw; 
-  margin-left: 2vw;
+  width: 5vw; 
+  margin-left: 3vw;
   margin-top: 3vh;
 }
   
 .Logo_bottom {
   position: absolute;
   bottom: 0;
-  left: 5.5vw;
-  font-size: 10px;
-  top: 15vh;
+  left: 5.7vw;
+  font-size: 14px;
+  top: 12vh;
   transform: translateX(-50%);
   color: #fff;
   white-space: nowrap;
@@ -70,14 +72,14 @@
   display: flex;
   flex-direction: column;
   width: 38vw; /* 너비는 그대로 유지 */
-  height: 35vh; /* 높이를 25vh로 수정 */
+  height: 36vh; /* 높이를 25vh로 수정 */
   flex-shrink: 0;
   border-radius: 30px;
   background: #282828;
   box-shadow: 0px 0px 30px 5px rgba(242, 152, 39, 0.12); /* 그림자 크기는 그대로 유지 */
   position: relative;
-  color: white;
-  top: 0vh; /* 위치를 20vh로 조절 */
+  color: white; 
+  top: -1vh; /* 위치를 20vh로 조절 */
   padding: 8vh; /* 내부 여백은 그대로 유지 */
   margin-left: 100px;
 }
@@ -134,11 +136,11 @@
 }
 
 .MyInfoImg {
-  position: absolute;
-  bottom: -5vh;
-  right: -30px; /* Adjust the right property */
-  width: 2.5vw;
-  margin: 5px; /* Add margin as needed */
+  position: relative;
+    bottom: 0;
+    width: 2.2vw;
+    margin-bottom: 10%;
+    left: 95%;
 }
 
 .Lion_info {
@@ -154,7 +156,7 @@
   border-radius: 20px;
   background: #F29827;
   margin-left: 11vw;
-  margin-top: 15vh;
+  margin-top: 5vh;
   color: white;
   font-size: 1.5vw;
 }

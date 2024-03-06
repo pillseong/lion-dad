@@ -7,10 +7,11 @@ import MenuHeader from '../Main/header/MenuHeader';
 
 function Notice() {
   return (
-    <>
-      <LogoHeader />
+    <div className='body_ang'>
+     
       <MenuHeader />
      <Headers state='Curriculum'/>
+     <LogoHeader />
       <hr className='line'></hr>
 
       <div className='main_container'>
@@ -29,6 +30,8 @@ function Notice() {
             <div className='line__2_1'>   </div>
             <div className='line__2_2'>   </div>
             <div className='v'></div>
+
+
 
             <div className='line__3'>   </div>
             <div className='line__3_1'>   </div>
@@ -71,7 +74,9 @@ function Notice() {
           <h4 className='Branding'>Branding</h4>
 
       </div> 
+      <div className='line__group'>
       <div className='line__4'></div>
+      </div>
       <div className='v2'></div>
       <h2 className='Design-Tool'>Design Tool</h2>
     <div className='Tool-box'>
@@ -79,7 +84,8 @@ function Notice() {
     <h4 className='Photoshop'>Photoshop</h4>
     <h4 className='IIIIustrator'>IIIIustrator</h4>
     </div>
-    </>
+  <div className='hidde__line'></div>
+  </div>
   );
 }
 

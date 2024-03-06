@@ -10,11 +10,11 @@ import MenuHeader from '../Main/header/MenuHeader';
 function LinkLion() {
   return (
     <>
-    <LogoHeader/>
+  
     <MenuHeader/>
 
-     
       <Headers state='LinkLion' />
+      <LogoHeader/>
       <hr className='line'></hr>
       <div className='container'>
       <div className='image_group'>

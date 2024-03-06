@@ -6,7 +6,7 @@
     background-color: #F29827;
   }
     .Frontend_Manager{
-        margin-left: -68%;
+        margin-left: -64%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -23,13 +23,13 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 1%;
+    margin-top: 3.4%;
     
     }
     .Manager_manager{
     position: absolute;
-    margin-top: 3.4%;
-    margin-left: -68%;
+    margin-top: 5%;
+    margin-left: -64%;
         color: #FFF;
     text-align: center;
     text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
@@ -42,11 +42,11 @@
     }
     .Design_box{
         position: absolute;
-        width: 1150px;
+        width: 1300px;
     height: 400px;
     flex-shrink: 0;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;
-   margin-top: 186%;
+   margin-top: 175%;
    margin-left: -3%;
    background: url(design.png);
    background-size: 23%;
@@ -60,7 +60,7 @@
     }
     .Frontend_box{
         position: absolute;
-        width: 1150px;
+        width: 1300px;
     height: 400px;
     flex-shrink: 0;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;
@@ -102,7 +102,7 @@ margin-top: 5%;
 margin-left: 10%;
     }
 
-.manager{
+.manager{   
     font-size: 24px;
     margin-left :25%;
     margin-top: -0.8% ;
@@ -444,7 +444,7 @@ line-height: normal;
 
 }
 .Backend_Manager{
-    margin-left: -68.5%;
+    margin-left: -64.3%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -461,11 +461,11 @@ line-height: normal;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 75%;
+    margin-top: 77.4%;
 
 }
 .Backend_Manager_1{
-    margin-left: -68%;
+    margin-left: -64%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -482,12 +482,12 @@ line-height: normal;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 76.9%;
+    margin-top: 79%;
 
 
 }
 .Design_Manager{
-    margin-left: -70%;
+    margin-left: -64.3%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -504,12 +504,12 @@ line-height: normal;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 177%;
+    margin-top: 168.6%;
 
 
 }
 .Design_manager_1{
-    margin-left: -68%;
+    margin-left: -63%;
     position: absolute;
     display: flex;
     width: 288px;
@@ -526,7 +526,7 @@ line-height: normal;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-top: 179%;
+    margin-top: 170%;
 
 }
 .Backmanager1{
@@ -543,7 +543,7 @@ line-height: normal;
 }
 .Backend_box{
     position: absolute;
-    width: 1150px;
+    width: 1300px;
     height: 400px;
     flex-shrink: 0;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50) inset;

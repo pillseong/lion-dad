@@ -1,3 +1,31 @@
+.id__input{
+
+
+    width: 410px;
+    height: 70px;
+    margin-top: -3.5% !important;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+    margin-left: 0.8%;
+}
+.pw__input{
+    width: 410px;
+    height: 70px;
+    margin-top: 3.7% !important;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin-left: 0.8%;
+
+}
+
+
+
 .login_Border {
 
     display: flex;
@@ -11,6 +39,8 @@
 
 
 .login_title{
+
+        
         background-image: url(login.png);
         background-repeat: no-repeat;
         width: 60vw;
@@ -84,45 +114,48 @@
         width: 293px;
         height: 55px;
         flex-shrink: 0;
-        border-radius: 18px;
+        border-radius: 24px;
         background-color: #ffda92;
         box-shadow: 5px 5px 30px 0px rgba(170,170,170,0.25);
         display: flex;
         justify-self: center;
         margin-left: 29px;
+      
     
 
     } 
     input::placeholder{
         color: white;
-        font-size: 14px;
-
+        font-size: 17px;
+      
     }
     .login_Button {
-        margin-top: 120px;
-        margin-left: 8px;
+        position: absolute;
+        margin-top: 15.9%;
+        margin-left: 2.5%;
 
     }
 
-    .login_Button button{
-        width: 300px;
-        height: 60px;
+    .login_Button button{ 
+        width: 320px;
+        height: 70px;
         flex-shrink: 0;
         border-radius: 60px;
         background-color: #ffda92;
         color: #FFF;
         font-family: Inter;
-        font-size: 20px;
+        font-size: 26px;
         font-style: normal;
         font-weight: bold;
-        line-height: normal;
+        line-height: normal;    
         margin-left: 20px;
     }
     .Login-line{
         position: absolute;
-        width: 350px;
-        margin-top: 220px;
+        width: 500px;
+        margin-top: 10%;
         height: 1px;
+        margin-left: -1.2%;
         background-color: #ffda92;
         border: 1px solid #ffda92;
        
@@ -160,11 +193,29 @@
 
         color: #ffda92;
         position: absolute;
-        margin-top:
+        margin-top: -5.7%;
+        margin-left: 1%;
+        font-size: 26px;
+        font-weight: bold;
+        
+        
+    }
+    .Pw{
+        color: #ffda92;
+        position: absolute;
+        margin-top: 1.5%;
+        margin-left: 1%;
+        font-size: 26px;
+        font-weight: bold;
     }
     .Login{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top:-25%;
         font-size: 37px;
-        margin-top: -30px;
+        
+        position: absolute;
       
     }
     .state_font_box{
@@ -173,37 +224,37 @@
     }
    
     .state_font1{
+        font-size: 21px;
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
+        position: relative;
         width: 450px;
         background-image:url("image1.png") ;
         background-repeat: no-repeat;
-        background-size: 30px;
-        background-position: 25% -15%;
-       margin-left: -53px;  
-       margin-top: 40px; 
+        background-size: 32px;
+        background-position: 20% -50%;
+       margin-left:  0.3%;  
+       margin-top: 48%;
+       margin-bottom: 2%;
        text-decoration: none;
        color: #ffda92;
     }
 .state_font2{  
+    font-size: 21px;
     display: flex;
     justify-content: center;
-    position: absolute;
+    position: relative;
     width: 450px;
     height: 45px;
-    top: 63vh;
+    margin-bottom: -12vh;
+
     background-image:url("image1.png") ;
     background-repeat: no-repeat;
-    background-size: 30px;
-    background-position: 19.7% -2%;
-    margin-left: -30px;
+    background-size: 32px;
+    background-position: 13% -2%;
+    margin-left: 7%;
     text-decoration: none;
     color: #ffda92;
 
-}
-.id__input{
-    width: 450px;
-    height: 80px;
 }

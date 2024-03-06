@@ -9,7 +9,7 @@ function Headers({state}) {
 
   const handleClick=(index)=>{
     setevent(index)
-  }
+  } 
 */
   return (
     <>
@@ -17,10 +17,10 @@ function Headers({state}) {
   <Link to='/Notice' className={`notice-link ${state === 'Curriculum' ? 'active' : ''}`} style={{ marginRight: '280px', marginTop: '-26px', marginLeft: '-20pxx' }}>
     <h3>Curriculum</h3>
   </Link>
-  <Link to='/LikeLion' className={`notice-link ${state === 'LinkLion' ? 'active' : ''}`} style={{ marginRight: '10px', marginTop: '-26px', marginLeft: '24px' }}>
+  <Link to='/LikeLion' className={`notice-link ${state === 'LinkLion' ? 'active' : ''}`} style={{ marginRight: '10px', marginTop: '-26px', marginLeft: '90px' }}>
     <h3>LikeLion</h3>
   </Link> 
-  <Link to='/Manager' className={`notice-link ${state === 'Manager' ? 'active' : ''}`} style={{ marginRight: '30px', marginTop: '-26px', marginLeft: '309px' }}>
+  <Link to='/Manager' className={`notice-link ${state === 'Manager' ? 'active' : ''}`} style={{ marginRight: '30px', marginTop: '-26px', marginLeft: '440px' }}>
     <h3>Manager</h3>
   </Link>
 </div>

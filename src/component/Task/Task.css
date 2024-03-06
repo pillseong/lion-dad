@@ -26,7 +26,7 @@ body {
   color: #F29827;
   text-align: center;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -35,7 +35,7 @@ body {
 .Task__title {
   color: #FFF;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -44,19 +44,21 @@ body {
 
 .task__create__button__y {
   position: absolute;
+  margin-top:-10px;
   background-color: #282828;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 44px;
   color: #F29827;
   border: 1px solid #F29827;
   border-radius: 100%;
-  margin-top:-10px;
 }
 
 
 
+
 .week_slide {
+  font-size: 20px;
   display: flex !important;
   position: relative !important;
   align-items: center !important;
@@ -98,7 +100,7 @@ body {
   margin-left: 55vw;
   color: #FFF;
   font-family: Inter;
-  font-size: 15px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -151,9 +153,15 @@ body {
 
 
 .task__del__button {
+  height: 30px;
+  width: 30px;
   position: absolute;
   margin-left: 2vw;
-  top: 10px;
+  top: 24px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid red !important;
   border-radius: 100% !important;
   background-color: #282828 !important;
@@ -169,6 +177,9 @@ body {
   border: 1px solid #F29827;
  
  
+}
+.modal__answer__input::placeholder{
+  
 }
 
 .week_slide {

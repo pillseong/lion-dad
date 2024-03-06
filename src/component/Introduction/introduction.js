@@ -209,6 +209,9 @@ function Introduction() {
     // 여기서 선택된 게시판 정보를 state로 넘겨줍니다.
     navigate('/introductionWrite');
   };
+  
+
+// 나머지 코드는 그대로 둡니다.
 
   return (
     <div className='parent-div'>

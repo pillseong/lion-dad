@@ -5,7 +5,7 @@ import cookie from "react-cookies";
 import axios from "axios";
 import likelionLogo from '../../images/LikeLion_Logo.png';
 import MyInfoImg from '../../images/MyInfo.png';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoHeader from '../header/LogoHeader';
 
 import MenuHeader from "../header/MenuHeader";
@@ -87,7 +87,18 @@ function Main() {
 
     navigate('/login');
   } 
-    
+     useEffect(() => {
+    // 페이지 컴포넌트가 마운트될 때 스크롤 막기 스타일을 body에 추가
+    document.body.classList.add('page-without-scroll');
+
+ // 페이지 컴포넌트가 언마운트될 때 스크롤 막기 스타일을 body에서 제거
+ return () => {
+  document.body.classList.remove('page-without-scroll');
+};
+}, []); // 빈 의존성 배열은 컴포넌트가 마운트될 때 한 번만 실행
+
+// 나머지 코드는 그대로 둡니다.
+
 
 
 //LikeLion 연한노란색   H 빨간색, B 남색, N 매우연한노란색, U 하늘색
@@ -106,9 +117,9 @@ function Main() {
           <span>Student_Number : {studentId}</span>
           <span>Name : {userName}</span>
           <span> Division : {userDivision}</span>
-          <a href="http://localhost:3000/notice">
+          <Link to="/notice">
             <img src={MyInfoImg} alt="ImfoLofo" className="MyInfoImg" />
-          </a>
+          </Link>
         </div>
         <button className="Logout_button" onClick={LogoutHeandler}>
           {accessToken ? 'LOGOUT' : 'LOGIN'}

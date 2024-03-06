@@ -106,6 +106,17 @@ function Login() {
   const changePw = (value) => {
     setUserData({ ...userData, password: value });
   };
+  useEffect(() => {
+    // 페이지 컴포넌트가 마운트될 때 스크롤 막기 스타일을 body에 추가
+    document.body.classList.add('page-without-scroll');
+
+ // 페이지 컴포넌트가 언마운트될 때 스크롤 막기 스타일을 body에서 제거
+ return () => {
+  document.body.classList.remove('page-without-scroll');
+};
+}, []); // 빈 의존성 배열은 컴포넌트가 마운트될 때 한 번만 실행
+
+// 나머지 코드는 그대로 둡니다.
 
   return (
     <>
@@ -144,6 +155,7 @@ function Login() {
               value={userData.password}
               onChange={(e) => changePw(e.target.value)}
               placeholder="Password"
+              className="pw__input"
             />  
             <hr className="Login-line"/> 
             <div className="state_font_box">

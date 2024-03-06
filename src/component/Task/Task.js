@@ -153,8 +153,8 @@ const Task = () => {
       // 추가: 오류 응답 내용 출력
       if (error.response) {
         console.error('오류 응답 내용:', error.response.data);
-      }
     }
+  }
   };
   
 
@@ -211,11 +211,13 @@ const Task = () => {
       },
     ],
   };
+ 
 
   return (
     <>
-      <LogoHeader />
+      
       <MenuHeader />
+      <LogoHeader />
       <div className='tum'></div>
       <div className='task__main__container'>
         <div className='task__header__main__container'>
@@ -260,4 +262,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default Task; 

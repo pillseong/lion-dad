@@ -7,13 +7,25 @@
     height: 1px;
     background-color: #F29827;
   }
+ 
+  .body{
+    height: 20% !important;
+    padding: 0;
+    margin: 0;
+  }
   
    .container{
 
         display: flex;
         justify-content: space-around;
+        height: 10%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
       }
       .image_group {
+        margin-top: 4%;
+        margin-left: -75%;
         width: 800px;
         height: 800px;
         flex-shrink: 0;
@@ -41,60 +53,60 @@
       
       .group1 {
         background-image: url('group1.png');
-        background-size: 30%;
+        background-size: 34%;
         background-position: 50% 5%;
       }
       
       .group2 {
         background-image: url('group2.png');
-        background-size: 25%;
+        background-size: 29%;
         background-position: 75% 5%;
       }
     
       .group3 {
         background-image: url('group3.png');
-        background-size: 20%;
+        background-size: 24%;
         background-position: 83% 28%;
       }
     .group4{
       background-image: url('group4.png');
-      background-size: 15%;
-      background-position: 95% 16%;
+      background-size: 19%;
+      background-position: 95% 13%;
 
     }
     .group5{
       background-image: url('group5.png');
-      background-size: 18%;
+      background-size: 22%;
       background-position: 100% 34%;
 
     }
     .group6{
       background-image: url('group6.png');
-      background-size: 20%;
-      background-position: 78% 44%;
+      background-size: 24%;
+      background-position: 78% 47%;
     }  
     .group7{
       background-image: url('group7.png');
-      background-size: 20%;
+      background-size: 24%;
       background-position: 54% 40%;
       
     }
     .group8{
       background-image: url('group8.png');
-      background-size: 20%;
-      background-position: 57% 56%;
+      background-size: 26%;
+      background-position: 53% 59%;
       
     }
     .group9{
       background-image: url('group9.png');
-      background-size: 20%;
-      background-position: 94% 57%;
+      background-size: 19%;
+      background-position: 96% 57%;
       
     }
 .Introduce{
     position: absolute;
-    top: 47%; 
-    margin-left: 10%;
+    top: 43%; 
+    margin-left: 3%;
 
     transform: translateX(40%); /* 가운데 정렬을 위한 보정값 */
     display: flex;
@@ -106,23 +118,24 @@
     color: #FFF;
     text-align: center;
     font-family: Inter;
-    font-size: 20px;
+    font-size: 21px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     border-radius: 5%;
 }
 .Introduce_box{
+  position: absolute;
 
-width: 570px;
-height: 430px;
+width: 680px;
+height: 450px;
 flex-shrink: 0;
 fill: #282828;
 box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.50);
 background-color: #282828;
 border-radius: 5%;
 margin-top: 9%;
-margin-left:9%;
+margin-left: 56%;
 margin-right: 20%;
 }
 

@@ -6,6 +6,7 @@
 
 body {
   -ms-overflow-style: none;
+  
 }
 
 ::-webkit-scrollbar {
@@ -15,7 +16,15 @@ body {
 .tum {
   margin-top: 22vh;
 }
+/* 페이지에서 스크롤 막기 */
+.page-without-scroll {
+  overflow: hidden;
+}
 
+/* 모달이 열릴 때 스크롤을 허용하기 위한 스타일 */
+.page-without-scroll .modal {
+  overflow-y: auto;
+}
 
 /* 모달 스타일 */
 .modal {
@@ -158,9 +167,9 @@ body.modal-open {
   position: absolute;
   margin-left: 90vw; /* 우측 여백이 7vw이므로 전체 화면 너비(100vw)에서 7vw만큼 뺀 값 */
   background-color: #282828;
-  width: 30px;
-  height: 30px;
-  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 44px;
   color: #F29827;
   border: 1px solid #F29827;
   border-radius: 100%;
@@ -169,7 +178,7 @@ body.modal-open {
 .Board__title {
   color: #FFF;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -180,26 +189,29 @@ body.modal-open {
   color: #F29827;
   text-align: center;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
 .Board_buttons {
+  margin-top: 1%;
   margin-left: 1vw;
 }
 
 
 
 .Board_buttons button {
-  border-radius: 30px;
-  background: #282828;
-  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.50);
+
+  background: none;
+  border: none;
+ 
+  
 }
 
 .Board_buttons button:hover {
-  background-color: #F29827;
+cursor: pointer;
 }
 
 .board_line {
@@ -218,6 +230,7 @@ body.modal-open {
   overflow: hidden;
   margin-left: 20vw;
 }
+
 
 .swiper-slide {
   margin-right: 0 !important;
@@ -241,6 +254,7 @@ body.modal-open {
   height: 11vh;
   color: white;
   overflow: hidden !important;
+  font-size: 20px;
 }
 
 .board_swiper_left {
@@ -312,11 +326,23 @@ body.modal-open {
 }
 
 .board__free__button {
-  color: white;
+  font-size: 23px;
+  color: #fff;
+  flex-direction: row;
+  font-family: inter;
+  font-style: normal;
+  font-weight: 700;
+  flex-direction: row;
 }
 
 .board__qna__button {
-  color: white;
+  color: #fff;
+  font-size: 23px;
+  flex-direction: row;
+  font-family: inter;
+  font-style: normal;
+  font-weight: 700;
+  flex-direction: row;
 }
 
 .board__admin__del__button {
@@ -377,7 +403,7 @@ body.modal-open {
 .slider_button_container {
   position: absolute;
   top: 85.4vh;
-  left: 8px;
+  left: 110px;
 }
 
 .slider_button_container button {
@@ -463,7 +489,7 @@ body.modal-open {
   animation: moveup 0.3s ease-out forwards;
   position: relative;
   top: -35%;
-  box-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
+  text-shadow: 4px 4px 10px rgba(242, 152, 39, 0.50);
 }
 
 @keyframes moveup {
