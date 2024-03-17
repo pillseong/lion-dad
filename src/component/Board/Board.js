@@ -53,11 +53,8 @@ function Board() {
   const [userDivision, setUserDivision] = useState(null);
   const [student_Id, setStudent_Id] = useState(null);
   studentId = parseInt(student_Id, 10)
-  setJjinStudentId = studentId;
   
-  const LoginAddress = 
-  // "https://port-0-djangoproject-umnqdut2blqqevwyb.sel4.cloudtype.app/login/";
-  "http://15.164.190.171/login/";
+  const LoginAddress = "http://15.164.190.171/login/";
 
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
@@ -263,9 +260,12 @@ function Board() {
   };
 
   const editPost = async (post) => {
+    const response = await axios.get(`${address}/${selectedPost}/`);
+    console.log(response.data.title);
     try {
-      await axios.put(`${address}/${selectedPost}/answers/`, post);
       const response = await axios.get(`${address}/${selectedPost}/`);
+
+      console.log(response.data.id, response.data.title, response.data.content);
       const updatedPost = response.data;
 
       setPostDetails(updatedPost);
@@ -280,7 +280,10 @@ function Board() {
       navigateToEditPage(selectedPost);
     } catch (error) {
       console.error('게시물 수정 중 오류 발생:', error);
+      console.log(studentId, response.data.title, response.data.content);
+
       setIsModalOpen(false);
+
     }
   };
 
@@ -339,6 +342,7 @@ function Board() {
   const qnaButtonRef = useRef(null);
   const freeButtonRef = useRef(null);
 
+
   useEffect(() => {
     // 컴포넌트가 마운트된 후에 참조가 올바르게 설정될 것입니다.
     qnaButtonRef.current = document.getElementById('qnaButton');
@@ -380,8 +384,8 @@ function Board() {
         <div className='Board_main_header_container'>
           <span className='Board_Lion_title'>Lion</span>
           <div className="Board_buttons">
-          <button className="board__qna__button" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
-            <button className="board__free__button" id="freeButton" onClick={() =>  handleButtonClick(freeButtonRef)}>자유게시판</button>
+          <button className="board__qna__button moved" id="qnaButton" onClick={() => handleButtonClick(qnaButtonRef)}>QnA게시판</button>
+          <button className="board__free__button" id="freeButton" onClick={() =>  handleButtonClick(freeButtonRef)}>자유게시판</button>
           </div>
         </div>
         <button onClick={handleWriteButtonClick} className='write_button'>+</button>
@@ -532,7 +536,6 @@ function Board() {
               {isModalOpen && (
               <div className='modal__answer__container_2'>
                 <div className='modal__answer__input__container_2'>
-                  <span className='modal__answer__input__main'>댓글 작성</span>
                   <textarea
                     placeholder="댓글을 입력하세요"
                     value={comment}

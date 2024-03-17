@@ -11,6 +11,8 @@ function Login() {
   const LoginAddress = "http://15.164.190.171/login/";
   const expires = new Date();
 
+  const [loginerror, setLoginerror] = useState(0);
+
   const [userData, setUserData] = useState({
     username: "",
     password: "",
@@ -48,6 +50,8 @@ function Login() {
       });
     } catch (error) {
       console.error("Error checking access token:", error);
+      setLoginerror(prev + 1);
+      console.log(loginerror);
     }
   };
 
@@ -90,10 +94,13 @@ function Login() {
       });
 
       navigate('/'); //로그인 성공시 메인페이지로 이동
-      
+      // setLoginerror([prev] + 1)
+      // console.log(loginerror);
 
     } catch (error) {
       console.error("Error:", error);
+      setLoginerror(prev + 1)
+      console.log(loginerror);
     } finally {
       setIsRequesting(false);
     }
